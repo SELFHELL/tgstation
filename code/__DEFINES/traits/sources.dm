@@ -199,10 +199,18 @@
 #define ADAMANTINE_EXTRACT_TRAIT "adamantine_extract"
 /// Given by the multiple_lives component to the previous body of the mob upon death.
 #define EXPIRED_LIFE_TRAIT "expired_life"
+/// Trait given to a ghost when they orbit something.
+#define GHOST_ORBITING_TRAIT "ghost_orbiting"
+/// Given by xenobio deployables
+#define XENOBIO_DEPLOYABLE_TRAIT "xenobio_deployable"
 /// Trait given to an atom/movable when they orbit something.
 #define ORBITING_TRAIT "orbiting"
 /// From the item_scaling element
 #define ITEM_SCALING_TRAIT "item_scaling"
+/// Applied by xenobio items/slime cores
+#define XENOBIO_TRAIT "xenobio"
+/// Applied by slime accessories
+#define SLIME_ACCESSORY_TRAIT "slime_accessory"
 /// Trait given by choking
 #define CHOKING_TRAIT "choking_trait"
 /// Trait given by hallucinations

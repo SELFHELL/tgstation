@@ -460,8 +460,39 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// If something has been engraved/cannot be engraved
 #define TRAIT_NOT_ENGRAVABLE "not_engravable"
 
+/// Slimes cannot feed on this
+#define TRAIT_NO_SLIME_FEED "no_slime_feed"
+
 /// Whether or not orbiting is blocked or not
 #define TRAIT_ORBITING_FORBIDDEN "orbiting_forbidden"
+
+/// Gives special effects to certain slimes and prevents the "king" slime from being attacked by other slimes
+#define TRAIT_SLIME_KING "slime_king"
+
+/// Lowers damage dealt by slime feeding by 25%
+#define TRAIT_SLIME_RESISTANCE "slime_resistance"
+
+#define TRAIT_SLIME_STASIS "slime_stasis"
+#define TRAIT_SLIME_RABID "slime_rabid"
+
+/// You can't gain nutrition with this trait
+#define TRAIT_NO_NUTRITION_GAIN "no_nutrition_gain"
+
+/// Similarly to toxlover, all toxin healing is going to be converted into damage, but toxin damage wont be converted into healing
+#define TRAIT_REVERSE_TOXHEAL "reverse_toxheal"
+
+/// Mobs with this trait dont display message about being catatonic/SSD
+#define TRAIT_NO_MINDLESS_MSG "no_mindless_msg"
+
+/// Mobs with this trait see all wire purposes
+#define TRAIT_KNOW_ALL_WIRES "know_all_wires"
+
+/// Mobs with this trait will get random color for every wire
+#define TRAIT_MESS_UP_WIRES "mess_up_colors"
+
+/// Humans with this trait will ignore fire protection and take damage anyways
+#define TRAIT_NO_FIRE_PROTECTION "no_fire_protection"
+
 /// Trait applied to mob/living to mark that spiders should not gain further enriched eggs from eating their corpse.
 #define TRAIT_SPIDER_CONSUMED "spider_consumed"
 /// Whether we're sneaking, from the creature sneak ability.
@@ -810,6 +841,15 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// trait denoting someone will sometimes recover out of crit
 #define TRAIT_UNBREAKABLE "unbreakable"
+
+/// Bluespace slimes cannot teleport from turfs with this trait
+#define TRAIT_BLUESPACE_SLIME_FIXATION "bluespace_slime_fixation"
+
+/// Atoms with this trait are immune to timestop
+#define TRAIT_TIMESTOP_IMMUNE "timestop_immune"
+
+/// Mobs with this trait can't be revived
+#define TRAIT_NO_REVIVE "no_revive"
 
 /// trait that prevents AI controllers from planning detached from ai_status to prevent weird state stuff.
 #define TRAIT_AI_PAUSED "TRAIT_AI_PAUSED"

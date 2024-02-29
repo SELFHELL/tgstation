@@ -171,6 +171,14 @@
 ///From obj/item/toy/crayon/spraycan
 #define COMSIG_LIVING_MOB_PAINTED "living_mob_painted"
 
+
+///From turf/open/proc/water_vapor_gas_act() and datum/reagent/water/expose_turf(turf/open/exposed_turf, reac_volume): ()
+#define COMSIG_LIVING_APPLY_WATER "living_apply_water"
+
+///from obj/item/vacuum_nozzle/afterattack(atom/movable/target, mob/user, proximity, params): (obj/item/vacuum_nozzle/nozzle, mob/user)
+#define COMSIG_LIVING_VACUUM_PRESUCK "living_vacuum_presuck"
+	#define COMPONENT_LIVING_VACUUM_CANCEL_SUCK (1<<0)
+
 ///From mob/living/proc/wabbajack(): (randomize_type)
 #define COMSIG_LIVING_PRE_WABBAJACKED "living_mob_wabbajacked"
 	/// Return to stop the rest of the wabbajack from triggering.

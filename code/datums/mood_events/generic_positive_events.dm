@@ -380,3 +380,8 @@
 /datum/mood_event/prophat
 	description = "This hat fills me with whimsical joy!"
 	mood_change = 2
+
+/datum/mood_event/pink_extract
+	description = "I feel like I could do anything!"
+	mood_change = 20
+	timeout = 30 SECONDS

@@ -73,6 +73,7 @@
 	return ..()
 
 /datum/component/dejavu/proc/rewind()
+	SEND_SIGNAL(parent, COMSIG_DEJAVU_REWIND, src)
 	to_chat(parent, span_notice(rewind_message))
 
 	//comes after healing so new limbs comically drop to the floor
@@ -124,3 +125,57 @@
 /datum/component/dejavu/timeline/rewind()
 	playsound(get_turf(parent), 'sound/items/modsuit/rewinder.ogg')
 	. = ..()
+
+///And for slimes as well!
+/datum/component/dejavu/slime
+	rewind_message = "You feel horribly nauseous as your sepia extract pulls you through space and time!"
+	no_rewinds_message = "You feel your body stabilizing as the now-spent extract finishes its job."
+
+/datum/component/dejavu/slime/rewind()
+	playsound(get_turf(parent), 'sound/magic/timeparadox2.ogg', 100, TRUE)
+	. = ..()
+
+/datum/component/dejavu/slime/sepia_core
+
+/datum/component/dejavu/slime/coremeister
+
+/datum/saved_bodypart
+	var/obj/item/bodypart/old_part
+	var/bodypart_type
+	var/brute_dam
+	var/burn_dam
+	var/stamina_dam
+
+/datum/saved_bodypart/New(obj/item/bodypart/part)
+	old_part = part
+	bodypart_type = part.type
+	brute_dam = part.brute_dam
+	burn_dam = part.burn_dam
+	stamina_dam = part.stamina_dam
+
+/mob/living/carbon/proc/apply_saved_bodyparts(list/datum/saved_bodypart/parts)
+	var/list/dont_chop = list()
+	for(var/zone in parts)
+		var/datum/saved_bodypart/saved_part = parts[zone]
+		var/obj/item/bodypart/already = get_bodypart(zone)
+		if(QDELETED(saved_part.old_part))
+			saved_part.old_part = new saved_part.bodypart_type
+		if(!already || already != saved_part.old_part)
+			saved_part.old_part.replace_limb(src, TRUE)
+		saved_part.old_part.heal_damage(INFINITY, INFINITY, INFINITY, null, FALSE)
+		saved_part.old_part.receive_damage(saved_part.brute_dam, saved_part.burn_dam, saved_part.stamina_dam, wound_bonus=CANT_WOUND)
+		dont_chop[zone] = TRUE
+	for(var/_part in bodyparts)
+		var/obj/item/bodypart/part = _part
+		if(dont_chop[part.body_zone])
+			continue
+		part.drop_limb(TRUE)
+
+/mob/living/carbon/proc/save_bodyparts()
+	var/list/datum/saved_bodypart/ret = list()
+	for(var/_part in bodyparts)
+		var/obj/item/bodypart/part = _part
+		var/datum/saved_bodypart/saved_part = new(part)
+
+		ret[part.body_zone] = saved_part
+	return ret

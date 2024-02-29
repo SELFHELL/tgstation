@@ -60,6 +60,8 @@
 		/obj/item/circuitboard/computer/scan_consolenew,
 		/obj/item/circuitboard/machine/dnascanner,
 		/obj/item/circuitboard/machine/dna_infuser,
+		/obj/item/circuitboard/machine/xenobio_equipment_vendor,
+		/obj/item/circuitboard/computer/slime_market,
 	)
 
 /obj/effect/spawner/random/techstorage/security_all

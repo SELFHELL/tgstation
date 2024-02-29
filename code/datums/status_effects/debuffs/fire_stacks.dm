@@ -36,7 +36,7 @@
 			return
 
 	owner = new_owner
-	set_stacks(new_stacks)
+	stacks = new_stacks
 
 	for(var/enemy_type in enemy_types)
 		var/datum/status_effect/fire_handler/enemy_effect = owner.has_status_effect(enemy_type)
@@ -60,7 +60,7 @@
 		for(var/merge_type in merge_types)
 			var/datum/status_effect/fire_handler/merge_effect = owner.has_status_effect(merge_type)
 			if(merge_effect)
-				merge_effects += merge_effects
+				merge_effects += merge_effect
 
 		if(LAZYLEN(merge_effects))
 			for(var/datum/status_effect/fire_handler/merge_effect in merge_effects)
@@ -77,6 +77,8 @@
 
 			adjust_stacks(override_effect.stacks)
 			qdel(override_effect)
+
+set_stacks(stacks)
 
 /**
  * Setter and adjuster procs for firestacks
@@ -124,6 +126,7 @@
 	remove_on_fullheal = TRUE
 
 	enemy_types = list(/datum/status_effect/fire_handler/wet_stacks)
+	merge_types = list(/datum/status_effect/fire_handler/fire_stacks/oil)
 	stack_modifier = 1
 
 	/// If we're on fire
@@ -195,10 +198,10 @@
 
 	if(!no_protection)
 		if(thermal_protection >= FIRE_IMMUNITY_MAX_TEMP_PROTECT)
-			return
+			return FALSE
 		if(thermal_protection >= FIRE_SUIT_MAX_TEMP_PROTECT)
 			victim.adjust_bodytemperature(5.5 * seconds_per_tick)
-			return
+			return FALSE
 
 	var/amount_to_heat = (BODYTEMP_HEATING_MAX + (stacks * 12)) * 0.5 * seconds_per_tick
 	if(owner.bodytemperature > BODYTEMP_FIRE_TEMP_SOFTCAP)
@@ -208,6 +211,7 @@
 	victim.adjust_bodytemperature(amount_to_heat)
 	victim.add_mood_event("on_fire", /datum/mood_event/on_fire)
 	victim.add_mob_memory(/datum/memory/was_burning)
+	return TRUE
 
 /**
  * Handles mob ignition, should be the only way to set on_fire to TRUE
@@ -292,3 +296,34 @@
 	if(particle_effect)
 		return
 	particle_effect = new(owner, /particles/droplets)
+
+
+/// Oil slime fire
+
+/datum/status_effect/fire_handler/fire_stacks/oil
+	id = "oil_fire_stacks"
+
+	merge_types = list()
+	override_types = list(/datum/status_effect/fire_handler/fire_stacks)
+	firelight_type = /obj/effect/dummy/lighting_obj/moblight/fire/oil
+
+/datum/status_effect/fire_handler/fire_stacks/oil/tick(delta_time, times_fired) //Doesn't lower with time or require air
+	if(stacks <= 0)
+		qdel(src)
+		return TRUE
+
+	if(!on_fire || isanimal(owner))
+		return TRUE
+
+	deal_damage(delta_time, times_fired)
+	update_overlay()
+
+/datum/status_effect/fire_handler/fire_stacks/oil/update_overlay()
+	last_icon_state = owner.update_fire_overlay(stacks, on_fire, last_icon_state, suffix = "_oil")
+
+/datum/status_effect/fire_handler/fire_stacks/oil/harm_human(delta_time, times_fired, no_protection = FALSE)
+	. = ..()
+	if(!.)
+		return
+
+	owner.adjustFireLoss(stacks * 0.2 * delta_time)

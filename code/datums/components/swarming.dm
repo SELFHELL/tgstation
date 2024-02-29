@@ -16,6 +16,7 @@
 	offset_y = rand(-max_y, max_y)
 
 	AddComponent(/datum/component/connect_loc_behalf, parent, swarming_loc_connections)
+	RegisterSignal(parent, COMSIG_LIVING_VACUUM_PRESUCK, .proc/vacuum_sucking)
 
 /datum/component/swarming/Destroy()
 	for(var/other in swarm_members)
@@ -24,6 +25,7 @@
 		if(!other_swarm.swarm_members.len)
 			other_swarm.unswarm()
 	swarm_members = null
+	UnregisterSignal(parent, COMSIG_LIVING_VACUUM_PRESUCK)
 	return ..()
 
 /datum/component/swarming/proc/join_swarm(datum/source, atom/movable/arrived, atom/old_loc, list/atom/old_locs)
@@ -61,3 +63,12 @@
 	if(is_swarming)
 		animate(owner, pixel_x = owner.pixel_x - offset_x, pixel_y = owner.pixel_y - offset_y, time = 2)
 		is_swarming = FALSE
+
+/datum/component/swarming/proc/vacuum_sucking(obj/item/vacuum_nozzle/nozzle, mob/user)
+	if(!is_swarming)
+		return
+
+	for(var/atom/movable/swarm_member in range(1, parent)) //Biiiig succ
+		if(!swarm_member.GetComponent(/datum/component/swarming))
+			continue
+		nozzle.suck_victim(swarm_member, user, silent = TRUE)

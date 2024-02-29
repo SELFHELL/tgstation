@@ -1046,6 +1046,133 @@
 	UnregisterSignal(owner, COMSIG_ATOM_UPDATE_OVERLAYS)
 	owner.update_icon()
 
+
+/datum/status_effect/slime_hallucinations
+	id = "slime_hallucinations"
+	duration = 15 SECONDS
+	status_type = STATUS_EFFECT_REFRESH
+	tick_interval = 1 SECONDS
+	alert_type = null
+	var/slimes = list()
+
+/datum/status_effect/slime_hallucinations/proc/create_slime()
+	var/turf/where
+	if(prob(50))
+		where = locate(owner.x + pick(-12, 12), owner.y + rand(-12, 12), owner.z)
+	else
+		where = locate(owner.x + rand(-12, 12), owner.y + pick(-12, 12), owner.z)
+	var/obj/effect/hallucination/simple/slime/slime = new(where, owner, src)
+	slimes[slime] = 1
+
+/datum/status_effect/slime_hallucinations/tick()
+	var/creation_chance = 50
+	for(var/obj/effect/hallucination/simple/slime/slime in slimes)
+		if(QDELETED(slime) || !slime.loc || slime.z != owner.z)
+			slimes -= slime
+			QDEL_NULL(slime)
+			continue
+
+		if(get_dist(owner, slime) >= 10 && prob(20) && slimes[slime] == 2) //Only delete slimes that have already shocked the owner
+			slimes -= slime
+			QDEL_NULL(slime)
+			continue
+
+		creation_chance /= 3
+
+	if(HAS_TRAIT_FROM(src, TRAIT_INCAPACITATED, STAMINA))
+		return
+
+	if(prob(creation_chance))
+		create_slime()
+
+/datum/status_effect/slime_hallucinations/on_remove()
+	for(var/obj/effect/hallucination/simple/slime/slime in slimes)
+		QDEL_NULL(slime)
+	return ..()
+
+/obj/effect/hallucination/simple/slime
+	name = "slime"
+	image_icon = 'icons/mob/slimes.dmi'
+	image_state = "pink"
+	var/datum/status_effect/slime_hallucinations/handler
+	var/move_dir
+
+/obj/effect/hallucination/simple/slime/Initialize(mapload, mob/living/carbon/T, datum/status_effect/slime_hallucinations/handler)
+	var/slime_color = pick_weight(list("purple" = 1, "grey" = 2, "pink" = 3))
+	var/is_adult = prob(66)
+	name = "[slime_color] [is_adult ? "adult" : "baby"] slime ([rand(1, 1000)])"
+	image_state = "[slime_color][is_adult ? "-adult" : ""]"
+	. = ..()
+	START_PROCESSING(SSfastprocess, src)
+	src.handler = handler
+
+/obj/effect/hallucination/simple/slime/process()
+	if(!prob(80))
+		return
+
+	if(handler.slimes[src] == 2)
+		if(!move_dir)
+			move_dir = pick(GLOB.alldirs)
+		forceMove(get_step(get_turf(src), move_dir))
+		return
+
+	forceMove(get_step_towards(src, target))
+	if(get_dist(src, target) <= 1)
+		handler.slimes[src] = 2
+		target.playsound_local(target, SFX_SPARKS, 50)
+		target.visible_message(span_warning("[target]'s body jerks as if it was shocked."), span_userdanger("The [name] shocks you!"))
+		var/power = rand(3, 6)
+		target.take_bodypart_damage(0, 0, power * 10)
+		target.Paralyze(power * 5)
+		target.adjust_timed_status_effect(power * 3, /datum/status_effect/speech/stutter)
+
+/obj/effect/hallucination/simple/slime/Destroy()
+	STOP_PROCESSING(SSfastprocess,src)
+	return ..()
+
+/atom/movable/screen/alert/status_effect/bonechill
+	name = "Bonechilled"
+	desc = "You feel a shiver down your spine after hearing the haunting noise of bone rattling. You'll move slower and get frostbite for a while!"
+	icon_state = "bloodchill"
+
+/datum/status_effect/bonechill
+	id = "bonechill"
+	duration = 80
+	alert_type = /atom/movable/screen/alert/status_effect/bonechill
+
+/datum/status_effect/bonechill/on_apply()
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/status_effect/bonechill)
+	return ..()
+
+/datum/status_effect/bonechill/tick()
+	if(prob(50))
+		owner.adjustFireLoss(1)
+		owner.adjust_timed_status_effect(3 SECONDS, /datum/status_effect/jitter)
+		owner.adjust_bodytemperature(-10)
+		if(ishuman(owner))
+			var/mob/living/carbon/human/humi = owner
+			humi.adjust_coretemperature(-10)
+
+/datum/status_effect/bonechill/on_remove()
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/status_effect/bonechill)
+
+/atom/movable/screen/alert/status_effect/no_nutrition_gain
+	name = "Stomach Cramps"
+	desc = "Your stomach refuses to process any nutrition whatsoever!"
+	icon_state = "no_nutrition"
+
+/datum/status_effect/no_nutrition_gain
+	id = "no_nutrition_gain"
+	duration = 1 MINUTES
+	alert_type = /atom/movable/screen/alert/status_effect/no_nutrition_gain
+
+/datum/status_effect/no_nutrition_gain/on_apply()
+	ADD_TRAIT(owner, TRAIT_NO_NUTRITION_GAIN, STATUS_EFFECT_TRAIT)
+	return ..()
+
+/datum/status_effect/no_nutrition_gain/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_NO_NUTRITION_GAIN, STATUS_EFFECT_TRAIT)
+	
 #undef HEALING_SLEEP_DEFAULT
 #undef HEALING_SLEEP_ORGAN_MULTIPLIER
 #undef SLEEP_QUALITY_WORKOUT_MULTIPLER

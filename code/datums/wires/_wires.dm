@@ -41,6 +41,9 @@
 	/// If every instance of these wires should be random. Prevents wires from showing up in station blueprints.
 	var/randomize = FALSE
 
+	/// Buffer list of colors, used for UI and TRAIT_MESS_UP_WIRES
+	var/list/wire_colors = list()
+
 /datum/wires/New(atom/holder)
 	..()
 	if(!istype(holder, holder_type))
@@ -261,6 +264,10 @@
 	if(user.is_holding_item_of_type(/obj/item/areaeditor/blueprints) && !randomize)
 		return TRUE
 
+	//the know all wires trait
+	if(HAS_TRAIT(user, TRAIT_KNOW_ALL_WIRES))
+		return TRUE
+
 	return FALSE
 
 /**
@@ -288,6 +295,9 @@
 /datum/wires/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if (!ui)
+		wire_colors = colors.Copy()
+		if(HAS_TRAIT(user, TRAIT_MESS_UP_WIRES))
+			shuffle_inplace(wire_colors)
 		ui = new(user, src, "Wires", "[holder.name] Wires")
 		ui.open()
 
@@ -295,9 +305,11 @@
 	var/list/data = list()
 	var/list/payload = list()
 	var/reveal_wires = can_reveal_wires(user)
+	var/list/buffer_colors = colors.Copy()
 
 	for(var/color in colors)
 		payload.Add(list(list(
+			"visible_color" = HAS_TRAIT(user, TRAIT_MESS_UP_WIRES) ? pick_n_take(buffer_colors) : color,
 			"color" = color,
 			"wire" = (((reveal_wires || always_reveal_wire(color)) && !is_dud_color(color)) ? get_wire(color) : null),
 			"cut" = is_color_cut(color),

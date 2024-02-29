@@ -64,6 +64,16 @@
 /obj/effect/timestop/channelled
 	channelled = TRUE
 
+/obj/effect/timestop/small_effect
+	pixel_x = -32
+	pixel_y = -32
+
+/obj/effect/timestop/small_effect/Initialize(mapload, radius, time, list/immune_atoms, start)
+	. = ..()
+	var/matrix/new_transform = matrix()
+	new_transform.Scale(0.6, 0.6)
+	transform = new_transform
+
 /datum/proximity_monitor/advanced/timestop
 	edge_is_a_field = TRUE
 	var/list/immune = list()
@@ -106,6 +116,9 @@
 	if(ismob(A))
 		var/mob/M = A
 		if(M.can_block_magic(antimagic_flags))
+			immune[A] = TRUE
+			return
+		if(HAS_TRAIT(A, TRAIT_TIMESTOP_IMMUNE))
 			immune[A] = TRUE
 			return
 	var/frozen = TRUE

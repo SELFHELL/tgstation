@@ -13,7 +13,6 @@
 	/// The specific riding component subtype we're loading our instructions from, don't leave this as default please!
 	var/riding_component_type = /datum/component/riding
 	/// If we have a xenobio red potion applied to us, we get split off so we can pass our special status onto new riding components
-	var/potion_boosted = FALSE
 
 /datum/element/ridable/Attach(atom/movable/target, component_type = /datum/component/riding, potion_boost = FALSE)
 	. = ..()
@@ -26,17 +25,14 @@
 
 	target.can_buckle = TRUE
 	riding_component_type = component_type
-	potion_boosted = potion_boost
 
 	RegisterSignal(target, COMSIG_MOVABLE_PREBUCKLE, PROC_REF(check_mounting))
-	if(isvehicle(target))
-		RegisterSignal(target, COMSIG_SPEED_POTION_APPLIED, PROC_REF(check_potion))
 	if(ismob(target))
 		RegisterSignal(target, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_change))
 
 /datum/element/ridable/Detach(atom/movable/target)
 	target.can_buckle = initial(target.can_buckle)
-	UnregisterSignal(target, list(COMSIG_MOVABLE_PREBUCKLE, COMSIG_SPEED_POTION_APPLIED, COMSIG_MOB_STATCHANGE))
+	UnregisterSignal(target, list(COMSIG_MOVABLE_PREBUCKLE, COMSIG_MOB_STATCHANGE))
 	return ..()
 
 /// Someone is buckling to this movable, which is literally the only thing we care about (other than speed potions)

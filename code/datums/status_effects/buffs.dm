@@ -594,3 +594,646 @@
 
 /datum/status_effect/jump_jet/on_remove()
 	owner.RemoveElement(/datum/element/forced_gravity, 0)
+
+
+/datum/status_effect/slime
+	id = "slime_goo"
+	status_type = STATUS_EFFECT_REPLACE
+	duration = 1 MINUTES
+	var/mutable_appearance/goo_overlay
+	var/effect_icon_state
+
+/datum/status_effect/slime/on_apply()
+	. = ..()
+	RegisterSignal(owner, COMSIG_COMPONENT_CLEAN_ACT, .proc/slime_washed)
+
+	goo_overlay = mutable_appearance('icons/effects/64x64.dmi', effect_icon_state)
+	goo_overlay.pixel_x = -16
+	goo_overlay.pixel_y = -16
+	owner.add_overlay(goo_overlay)
+
+/datum/status_effect/slime/on_remove()
+	. = ..()
+	owner.cut_overlay(goo_overlay)
+	UnregisterSignal(owner, COMSIG_COMPONENT_CLEAN_ACT)
+
+/datum/status_effect/slime/proc/slime_washed()
+	SIGNAL_HANDLER
+	qdel(src)
+	return COMPONENT_CLEANED
+
+/atom/movable/screen/alert/status_effect/orange_slime
+	name = "Orange Slime"
+	desc = "You are enveloped in a layer of fireproof orange slime!"
+	icon_state = "orange_slime"
+
+/datum/status_effect/slime/orange
+	alert_type = /atom/movable/screen/alert/status_effect/orange_slime
+	effect_icon_state = "orange_slime"
+
+/datum/status_effect/slime/orange/on_apply()
+	. = ..()
+	to_chat(owner, span_notice("You are covered in a fine layer of fireproof orange goo!"))
+	ADD_TRAIT(owner, TRAIT_NOFIRE, XENOBIO_TRAIT)
+	ADD_TRAIT(owner, TRAIT_RESISTHEAT, XENOBIO_TRAIT)
+
+/datum/status_effect/slime/orange/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_NOFIRE, XENOBIO_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_RESISTHEAT, XENOBIO_TRAIT)
+
+/datum/status_effect/slime/orange/get_examine_text()
+	return span_notice("[owner.p_they(TRUE)] are covered in a layer of fireproof orange slime.")
+
+/atom/movable/screen/alert/status_effect/dark_blue_slime
+	name = "Dark Blue Slime"
+	desc = "You are enveloped in a layer of stasis-inducing dark blue slime!"
+	icon_state = "dark_blue_slime"
+
+/datum/status_effect/slime/dark_blue
+	alert_type = /atom/movable/screen/alert/status_effect/dark_blue_slime
+	effect_icon_state = "dark_blue_slime"
+
+/datum/status_effect/slime/dark_blue/on_apply()
+	. = ..()
+	to_chat(owner, span_notice("You are covered in a fine layer of stasis-inducing dark blue slime!"))
+	owner.apply_status_effect(/datum/status_effect/grouped/stasis, STASIS_SLIME_EFFECT)
+	ADD_TRAIT(owner, TRAIT_TUMOR_SUPPRESSED, XENOBIO_TRAIT)
+	ADD_TRAIT(owner, TRAIT_RESISTLOWPRESSURE, XENOBIO_TRAIT) //Good way to survive if you/your friend get stuck in space without a way to get back in and have to wait for help
+	ADD_TRAIT(owner, TRAIT_NOBREATH, XENOBIO_TRAIT)
+	owner.extinguish_mob()
+
+/datum/status_effect/slime/dark_blue/on_remove()
+	. = ..()
+	owner.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_SLIME_EFFECT)
+	REMOVE_TRAIT(owner, TRAIT_TUMOR_SUPPRESSED, XENOBIO_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_RESISTLOWPRESSURE, XENOBIO_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_NOBREATH, XENOBIO_TRAIT)
+
+/datum/status_effect/slime/dark_blue/get_examine_text()
+	return span_notice("[owner.p_they(TRUE)] are covered in a layer of stasis-inducing dark blue slime.")
+
+/atom/movable/screen/alert/status_effect/red_slime
+	name = "Red Slime"
+	desc = "You are enveloped in a layer of shiny red slime!"
+	icon_state = "red_slime"
+
+/datum/status_effect/slime/red
+	alert_type = /atom/movable/screen/alert/status_effect/red_slime
+	effect_icon_state = "red_slime"
+	duration = 3 MINUTES
+
+/datum/status_effect/slime/red/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, XENOBIO_TRAIT)
+	ADD_TRAIT(owner, TRAIT_HARDLY_WOUNDED, XENOBIO_TRAIT)
+	ADD_TRAIT(owner, TRAIT_NODISMEMBER, XENOBIO_TRAIT)
+	owner.add_movespeed_mod_immunities(type, /datum/movespeed_modifier/equipment_speedmod)
+
+/datum/status_effect/slime/red/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, XENOBIO_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_HARDLY_WOUNDED, XENOBIO_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_NODISMEMBER, XENOBIO_TRAIT)
+	owner.remove_movespeed_mod_immunities(type, /datum/movespeed_modifier/equipment_speedmod)
+
+/datum/status_effect/slime/red/get_examine_text()
+	return span_notice("[owner.p_they(TRUE)] are covered in a layer of shiny red slime.")
+
+/atom/movable/screen/alert/status_effect/oil_slime
+	name = "Oil Slime"
+	desc = "Your feet are enveloped in a layer of flammable oily slime!"
+	icon_state = "oil_slime"
+
+/datum/status_effect/slime/oil
+	alert_type = /atom/movable/screen/alert/status_effect/oil_slime
+	effect_icon_state = "oil_slime_feet"
+	tick_interval = 1
+
+/datum/status_effect/slime/oil/tick(delta_time, times_fired)
+	if(owner.fire_stacks >= 3)
+		return
+	owner.adjust_fire_stacks(3 - owner.fire_stacks, /datum/status_effect/fire_handler/fire_stacks/oil)
+
+/datum/status_effect/slime/oil/on_apply()
+	. = ..()
+	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, .proc/on_moved)
+	RegisterSignal(owner, COMSIG_LIVING_IGNITED, .proc/slime_washed)
+
+/datum/status_effect/slime/oil/on_remove()
+	UnregisterSignal(owner, list(COMSIG_MOVABLE_MOVED, COMSIG_LIVING_IGNITED))
+
+/datum/status_effect/slime/oil/proc/on_moved(datum/source, old_loc)
+	SIGNAL_HANDLER
+	if(!isturf(owner.loc)) //No locker abuse
+		return
+
+	new /obj/effect/decal/cleanable/fuel_pool/oil(owner.loc)
+
+/datum/status_effect/slime/oil/get_examine_text()
+	return span_notice("[owner.p_their(TRUE)] feet are covered in a layer of flammable oily slime.")
+
+/atom/movable/screen/alert/status_effect/adamantine_slime
+	name = "Adamantine Slime"
+	desc = "You are enveloped in a layer of thick and heavy adamantine slime!"
+	icon_state = "red_slime"
+
+/datum/status_effect/slime/adamantine
+	alert_type = /atom/movable/screen/alert/status_effect/adamantine_slime
+	effect_icon_state = "adamantine_slime"
+	duration = 3 MINUTES
+
+/datum/status_effect/slime/adamantine/on_apply()
+	. = ..()
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/status_effect/adamantine_slime)
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/human_owner = owner
+	human_owner.physiology.damage_resistance += 25
+
+/datum/status_effect/slime/adamantine/on_remove()
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/status_effect/adamantine_slime)
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/human_owner = owner
+	human_owner.physiology.damage_resistance -= 25
+
+/datum/status_effect/slime/adamantine/get_examine_text()
+	return span_notice("[owner.p_they(TRUE)] are covered in a thick layer of heavy adamantine slime.")
+
+/atom/movable/screen/alert/status_effect/golden_eyes
+	name = "Golden Gaze"
+	desc = "You are using golden slime's power to gaze through someone else's eyes! Click on this alert to toggle this effect on and off."
+	icon_state = "golden_eyes"
+
+/atom/movable/screen/alert/status_effect/golden_eyes/Click(location, control, params)
+	. = ..()
+	if(!.)
+		return
+
+	var/datum/status_effect/golden_eyes/golden_eyes = attached_effect
+	if(golden_eyes.gazing)
+		golden_eyes.stop_gazing()
+	else
+		golden_eyes.start_gazing()
+
+/datum/status_effect/golden_eyes
+	id = "golden_eyes"
+	duration = 3 MINUTES
+	tick_interval = 1
+	alert_type = /atom/movable/screen/alert/status_effect/golden_eyes
+	status_type = STATUS_EFFECT_REPLACE
+	var/original_eye_color_left
+	var/original_eye_color_right
+	var/mob/living/following
+	var/gazing = TRUE
+	var/peers = 0
+
+/datum/status_effect/golden_eyes/on_creation(mob/living/new_owner, mob/living/to_follow)
+	if(!ishuman(new_owner))
+		CRASH("[type] status effect added to non-human owner: [new_owner ? new_owner.type : "null owner"]")
+
+	if(!to_follow || !istype(to_follow))
+		CRASH("[type] status effect added with to_follow being non-living: [to_follow ? to_follow.type : "null to_follow"]")
+
+	following = to_follow
+	return ..()
+
+/datum/status_effect/golden_eyes/on_apply()
+	. = ..()
+	var/mob/living/carbon/human/human_owner = owner
+	original_eye_color_left = human_owner.eye_color_left
+	original_eye_color_right = human_owner.eye_color_right
+	human_owner.eye_color_left = "#EEAA01"
+	human_owner.eye_color_right = "#EEAA01"
+	human_owner.dna.update_ui_block(DNA_EYE_COLOR_LEFT_BLOCK)
+	human_owner.dna.update_ui_block(DNA_EYE_COLOR_RIGHT_BLOCK)
+	human_owner.update_body()
+	start_gazing()
+
+/datum/status_effect/golden_eyes/on_remove()
+	if(!ishuman(owner))
+		stack_trace("[type] status effect being removed from non-human owner: [owner ? owner.type : "null owner"]")
+
+	var/mob/living/carbon/human/human_owner = owner
+	human_owner.eye_color_left = original_eye_color_left
+	human_owner.eye_color_right = original_eye_color_right
+	human_owner.dna.update_ui_block(DNA_EYE_COLOR_LEFT_BLOCK)
+	human_owner.dna.update_ui_block(DNA_EYE_COLOR_RIGHT_BLOCK)
+	human_owner.update_body()
+	stop_gazing()
+
+/datum/status_effect/golden_eyes/proc/stop_gazing()
+	owner.clear_fullscreen("golden_eyes")
+	owner.cure_blind("golden_eyes")
+	owner.cure_nearsighted("golden_eyes")
+	owner.set_blurriness(min(20, owner.eye_blurry)) //No powergaming to get rid of blurry/blind
+	owner.set_blindness(min(20, owner.eye_blind))
+	owner.reset_perspective()
+	gazing = FALSE
+
+/datum/status_effect/golden_eyes/proc/start_gazing()
+	owner.reset_perspective(following)
+	owner.overlay_fullscreen("golden_eyes", /atom/movable/screen/fullscreen/golden_eyes, 0)
+	gazing = TRUE
+	peers += 1
+	if(prob(25 * peers)) /// Don't overuse!
+		to_chat(following, span_warning("Your head pounds as you feel something otherworldly connect to your mind..."))
+
+/datum/status_effect/golden_eyes/tick(delta_time, times_fired)
+	. = ..()
+	if(!gazing)
+		return
+
+	if(HAS_TRAIT(following, TRAIT_BLIND) && !HAS_TRAIT_FROM(owner, TRAIT_BLIND, "golden_eyes"))
+		owner.become_blind("golden_eyes")
+	else if(!HAS_TRAIT(following, TRAIT_BLIND) && HAS_TRAIT_FROM(owner, TRAIT_BLIND, "golden_eyes"))
+		owner.cure_blind("golden_eyes")
+
+	if(HAS_TRAIT(following, TRAIT_NEARSIGHT) && !HAS_TRAIT_FROM(owner, TRAIT_NEARSIGHT, "golden_eyes"))
+		owner.become_nearsighted("golden_eyes")
+	else if(!HAS_TRAIT(following, TRAIT_NEARSIGHT) && HAS_TRAIT_FROM(owner, TRAIT_NEARSIGHT, "golden_eyes"))
+		owner.cure_nearsighted("golden_eyes")
+
+	if(owner.eye_blurry != following.eye_blurry)
+		owner.set_blurriness(following.eye_blurry)
+	if(owner.eye_blind != following.eye_blind)
+		owner.set_blindness(following.eye_blind)
+
+/datum/status_effect/golden_eyes/get_examine_text()
+	if(!gazing)
+		return span_notice("[owner.p_their(TRUE)] eyes are of unnatural bright golden color")
+	return span_notice("[owner.p_their(TRUE)] eyes are of unnatural bright golden color and it seems like [owner.p_their()] mind is somewhere else...")
+
+/atom/movable/screen/alert/status_effect/pyrite_morpher
+	name = "Pyrite Morpher"
+	desc = "Your body is being morphed by a pyrite extract!"
+	icon_state = "pyrite_morpher"
+
+/datum/status_effect/slime/pyrite
+	duration = 5 MINUTES
+	tick_interval = 1
+	alert_type = /atom/movable/screen/alert/status_effect/pyrite_morpher
+	effect_icon_state = "pyrite_slime"
+	var/datum/icon_snapshot/impersonating
+	var/masquerade_on = FALSE
+	var/wibbling = TRUE
+	var/regain_timer
+
+/datum/status_effect/slime/pyrite/on_creation(mob/living/new_owner, mob/living/carbon/human/to_impersonate)
+	if(!ishuman(new_owner))
+		CRASH("[type] status effect added to non-human owner: [new_owner ? new_owner.type : "null owner"]")
+
+	if(!iscarbon(to_impersonate))
+		CRASH("[type] status effect added with non-human to_impersonate: [to_impersonate ? to_impersonate.type : "null to_impersonate"]")
+
+	impersonating = new()
+	impersonating.name = to_impersonate.name
+	impersonating.icon = to_impersonate.icon
+	impersonating.icon_state = to_impersonate.icon_state
+	impersonating.overlays = to_impersonate.get_overlays_copy(list(HANDS_LAYER))
+	return ..()
+
+/datum/status_effect/slime/pyrite/on_apply()
+	. = ..()
+	RegisterSignal(owner, list(COMSIG_PARENT_ATTACKBY, COMSIG_ATOM_HULK_ATTACK, COMSIG_ATOM_ATTACK_HAND, COMSIG_ATOM_ATTACK_PAW, COMSIG_ATOM_HITBY, COMSIG_ATOM_BULLET_ACT), .proc/drop_masquarade)
+	apply_wibbly_filters(owner)
+	playsound(owner, 'sound/effects/attackblob.ogg', 50, TRUE)
+	regain_timer = addtimer(CALLBACK(src, .proc/masquarade), 10 SECONDS, TIMER_STOPPABLE)
+
+/datum/status_effect/slime/pyrite/on_remove()
+	UnregisterSignal(owner, list(COMSIG_PARENT_ATTACKBY, COMSIG_ATOM_HULK_ATTACK, COMSIG_ATOM_ATTACK_HAND,
+									  COMSIG_ATOM_ATTACK_PAW, COMSIG_ATOM_HITBY, COMSIG_ATOM_BULLET_ACT))
+	drop_masquarade(regain = FALSE)
+
+/datum/status_effect/slime/pyrite/proc/drop_masquarade(regain = TRUE)
+	deltimer(regain_timer)
+	if(regain)
+		regain_timer = addtimer(CALLBACK(src, .proc/start_regaining), 5 SECONDS, TIMER_STOPPABLE)
+
+	if(wibbling || masquerade_on)
+		playsound(owner, 'sound/effects/bamf.ogg', 100, TRUE)
+
+	wibbling = FALSE
+	remove_wibbly_filters(owner)
+
+	if(!masquerade_on)
+		return
+
+	masquerade_on = FALSE
+	var/mob/living/carbon/human/human_owner = owner
+	var/name_buffer = human_owner.name_override
+	human_owner.name_override = null
+	human_owner.cut_overlays()
+	human_owner.regenerate_icons()
+	human_owner.visible_message(span_danger("[name_buffer]'s flesh melts, revealing [human_owner.get_visible_name()]!"))
+	human_owner.add_overlay(goo_overlay)
+
+/datum/status_effect/slime/pyrite/proc/start_regaining()
+	apply_wibbly_filters(owner)
+	wibbling = TRUE
+	playsound(owner, 'sound/effects/attackblob.ogg', 50, TRUE)
+	regain_timer = addtimer(CALLBACK(src, .proc/masquarade), 5 SECONDS, TIMER_STOPPABLE)
+
+/datum/status_effect/slime/pyrite/proc/masquarade()
+	var/mob/living/carbon/human/human_owner = owner
+	masquerade_on = TRUE
+	wibbling = FALSE
+	remove_wibbly_filters(human_owner)
+	var/original_name = human_owner.name
+	human_owner.name_override = impersonating.name
+	human_owner.icon = impersonating.icon
+	human_owner.icon_state = impersonating.icon_state
+	human_owner.cut_overlays()
+	human_owner.add_overlay(impersonating.overlays)
+	human_owner.update_inv_hands()
+	human_owner.visible_message(span_danger("[original_name]'s flesh melts, reforming into [human_owner.name_override]!"))
+	playsound(owner, 'sound/effects/bamf.ogg', 100, TRUE)
+
+/datum/status_effect/slime/pyrite/get_examine_text()
+	if(!masquerade_on)
+		return span_warning("[owner.p_they(TRUE)] are covered in a layer of pyrite slime!")
+
+/atom/movable/screen/alert/status_effect/rainbow_shield
+	name = "Rainbow Shield"
+	desc = "You are protected by power of a rainbow slime extract!"
+	icon_state = "rainbow_slime"
+
+/datum/status_effect/rainbow_shield
+	id = "rainbow_slime"
+	duration = 15 SECONDS
+	tick_interval = 1
+	alert_type = /atom/movable/screen/alert/status_effect/rainbow_shield
+	status_type = STATUS_EFFECT_REPLACE
+	var/current_hue = 0 //+8 per sec
+	var/orig_mutcolor
+	var/list/original_limb_color = list()
+	var/orig_facial
+	var/orig_hair
+
+/datum/status_effect/rainbow_shield/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_NEVER_WOUNDED, type)
+	ADD_TRAIT(owner, TRAIT_NODISMEMBER, type)
+	ADD_TRAIT(owner, TRAIT_NOLIMBDISABLE, type) //Even the crippled will walk!
+	ADD_TRAIT(owner, TRAIT_NODISMEMBER, type)
+	ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+	ADD_TRAIT(owner, TRAIT_PACIFISM, type)
+
+	if(!ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/human_owner = owner
+
+	human_owner.physiology.damage_resistance += 90
+	human_owner.physiology.bleed_mod *= 0.1
+	human_owner.log_message("gained rainbow shield stun immunity", LOG_ATTACK)
+	human_owner.add_stun_absorption("rainbow_shield", INFINITY, 5)
+
+	orig_facial = human_owner.facial_hair_color
+	orig_hair = human_owner.hair_color
+
+	if(human_owner.dna && human_owner.dna.species)
+		if(MUTCOLORS in human_owner.dna.species)
+			orig_mutcolor = human_owner.dna.features["mcolor"]
+
+	for(var/obj/item/bodypart/limb in human_owner.bodyparts)
+		if(!limb.mutation_color)
+			original_limb_color[WEAKREF(limb)] = FALSE
+			continue
+
+		original_limb_color[WEAKREF(limb)] = limb.mutation_color
+
+	if(prob(5) && SSevents.holidays[APRIL_FOOLS])
+		human_owner.say(";WOMEN FEAR ME", spans = list(SPAN_YELL, "colossus"), ignore_spam = TRUE, forced = type)
+		addtimer(CALLBACK(human_owner, /atom/movable.proc/say, ";FISH FEAR ME", null, list(SPAN_YELL, "colossus"), TRUE, null, TRUE, type), 3 SECONDS)
+		addtimer(CALLBACK(human_owner, /atom/movable.proc/say, ";MEN TURN THEIR EYES AWAY FROM ME", null, list(SPAN_YELL, "colossus"), TRUE, null, TRUE, type), 6 SECONDS)
+		addtimer(CALLBACK(human_owner, /atom/movable.proc/say, ";AS I WALK NO BEAST DARES TO MAKE A SOUND IN MY PRESENCE", null, list(SPAN_YELL, "colossus"), TRUE, null, TRUE, type), 9 SECONDS)
+		addtimer(CALLBACK(human_owner, /atom/movable.proc/say, ";I AM ALONE ON THIS BARREN EARTH", null, list(SPAN_YELL, "colossus"), TRUE, null, TRUE, type), 12 SECONDS)
+		addtimer(CALLBACK(human_owner, /atom/movable.proc/say, ";I AM THY GOD [human_owner.gender == MALE ? "HIM" : (human_owner.gender == FEMALE ? "HER" : "IT")]SELF", null, list(SPAN_YELL, "colossus"), TRUE, null, TRUE, type), 15 SECONDS)
+
+/datum/status_effect/rainbow_shield/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_NEVER_WOUNDED, type)
+	REMOVE_TRAIT(owner, TRAIT_NODISMEMBER, type)
+	REMOVE_TRAIT(owner, TRAIT_NOLIMBDISABLE, type)
+	REMOVE_TRAIT(owner, TRAIT_NODISMEMBER, type)
+	REMOVE_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, type)
+
+	if(!ishuman(owner))
+		owner.remove_atom_colour(ADMIN_COLOUR_PRIORITY)
+		return
+
+	var/mob/living/carbon/human/human_owner = owner
+
+	human_owner.physiology.damage_resistance -= 90
+	human_owner.physiology.bleed_mod *= 10
+	human_owner.log_message("lost rainbow shield stun immunity", LOG_ATTACK)
+	if(islist(human_owner.stun_absorption) && human_owner.stun_absorption["blooddrunk"])
+		human_owner.stun_absorption -= "rainbow_shield"
+
+	human_owner.facial_hair_color = orig_facial
+	human_owner.hair_color = orig_hair
+
+	if(orig_mutcolor)
+		human_owner.dna.features["mcolor"] = orig_mutcolor
+		if(iscoremeister(owner))
+			var/datum/species/jelly/coremeister/species = human_owner.dna.species
+			species.glow.set_light_color(orig_mutcolor)
+
+	for(var/datum/weakref/limb_weakref in original_limb_color)
+		var/obj/item/bodypart/our_limb = limb_weakref.resolve()
+		if(!our_limb)
+			continue
+
+		if(original_limb_color[limb_weakref] == FALSE)
+			our_limb.mutation_color = null
+			continue
+
+		our_limb.mutation_color = original_limb_color[limb_weakref]
+
+	human_owner.update_body(TRUE)
+
+/datum/status_effect/rainbow_shield/tick(delta_time, times_fired)
+	. = ..()
+	current_hue = (current_hue + 8) % 360
+
+	var/light_shift = 60 + abs(current_hue % 120 - 60) / 4
+	var/new_color = rgb(current_hue, 100, light_shift, space = COLORSPACE_HSL)
+
+	if(!ishuman(owner)) //In case of admemery
+		owner.remove_atom_colour(ADMIN_COLOUR_PRIORITY)
+		owner.add_atom_colour(new_color, ADMIN_COLOUR_PRIORITY)
+		return
+
+	var/mob/living/carbon/human/human_owner = owner
+	if(isjellyperson(human_owner))
+		var/datum/species/jelly/jelly_species = human_owner.dna.species
+		if(jelly_species.rainbow_active) //Already rad as fuck
+			return
+
+	human_owner.facial_hair_color = new_color
+	human_owner.hair_color = new_color
+
+	if(orig_mutcolor)
+		human_owner.dna.features["mcolor"] = new_color
+		if(iscoremeister(owner))
+			var/datum/species/jelly/coremeister/species = human_owner.dna.species
+			species.glow.set_light_color(new_color)
+
+	var/list/our_parts = human_owner.bodyparts.Copy()
+	for(var/datum/weakref/limb_weakref in original_limb_color)
+		var/obj/item/bodypart/our_limb = limb_weakref.resolve()
+		if(!our_limb)
+			original_limb_color -= limb_weakref
+			continue
+
+		our_parts -= our_limb
+		our_limb.mutation_color = new_color
+
+	for(var/obj/item/bodypart/limb in our_parts)
+		if(!limb.mutation_color)
+			original_limb_color[WEAKREF(limb)] = FALSE
+			continue
+
+		original_limb_color[WEAKREF(limb)] = limb.mutation_color
+		limb.mutation_color = new_color
+
+	human_owner.update_body(TRUE)
+
+/atom/movable/screen/alert/status_effect/rainbow_dash
+	name = "Rainbow Dash"
+	desc = "You are filled with power of a rainbow slime extract!"
+	icon_state = "rainbow_slime"
+
+/atom/movable/screen/alert/status_effect/rainbow_dash/New()
+	. = ..()
+	if(prob(1))
+		desc = "You can be a magical pony too!" //Bruh
+
+/datum/status_effect/rainbow_dash
+	id = "rainbow_slime"
+	duration = 45 SECONDS
+	alert_type = /atom/movable/screen/alert/status_effect/rainbow_dash
+	status_type = STATUS_EFFECT_REPLACE
+	tick_interval = 1
+	var/current_hue = 0 //+8 per sec
+	var/orig_facial
+	var/orig_hair
+
+/datum/status_effect/rainbow_dash/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_PACIFISM, type)
+
+	if(!ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/human_owner = owner
+
+	human_owner.add_movespeed_modifier(/datum/movespeed_modifier/rainbow_dash)
+
+	orig_facial = human_owner.facial_hair_color
+	orig_hair = human_owner.hair_color
+	human_owner.update_body(TRUE)
+	RegisterSignal(human_owner, COMSIG_MOVABLE_MOVED, .proc/handle_move)
+
+/datum/status_effect/rainbow_dash/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, type)
+
+	if(!ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/human_owner = owner
+
+	human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/rainbow_dash)
+
+	human_owner.facial_hair_color = orig_facial
+	human_owner.hair_color = orig_hair
+	human_owner.update_body(TRUE)
+	UnregisterSignal(human_owner, COMSIG_MOVABLE_MOVED)
+
+/datum/status_effect/rainbow_dash/tick(delta_time, times_fired)
+	. = ..()
+	current_hue = (current_hue + 8) % 360
+
+	var/light_shift = 60 + abs(current_hue % 120 - 60) / 4
+	var/new_color = rgb(current_hue, 100, light_shift, space = COLORSPACE_HSL)
+
+	if(!ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/human_owner = owner
+	if(isjellyperson(human_owner))
+		var/datum/species/jelly/jelly_species = human_owner.dna.species
+		if(jelly_species.rainbow_active) //Already rad as fuck
+			return
+
+	human_owner.facial_hair_color = new_color
+	human_owner.hair_color = new_color
+	human_owner.update_body(TRUE)
+
+/datum/status_effect/rainbow_dash/proc/handle_move(datum/source, atom/old_loc, move_dir, forced = FALSE)
+	SIGNAL_HANDLER
+	var/turf/owner_turf = get_turf(owner)
+	if(!isturf(old_loc) || !owner_turf.Adjacent(old_loc))
+		return
+
+	var/light_shift = 60 + abs(current_hue % 120 - 60) / 4
+	var/paint_color = rgb(current_hue, 100, light_shift, space = COLORSPACE_HSL)
+	old_loc.AddComponent(/datum/component/rainbow_trail, paint_color, owner_turf)
+
+/atom/movable/screen/alert/status_effect/silver_control
+	name = "Silver Blorbie Control"
+	desc = "You are currently controlling a slime blorbie. Click this alert to abandon it."
+	icon_state = "silver_control"
+
+/atom/movable/screen/alert/status_effect/silver_control/Click(location, control, params)
+	. = ..()
+	if(!.)
+		return
+
+	if(tgui_alert(owner, "Are you sure you want to abandon control over your silver blorbie?", "Silver Blorbie Control", list("Yes", "No")) != "Yes")
+		return
+
+	qdel(attached_effect)
+
+/datum/status_effect/silver_control
+	id = "silver_control"
+	duration = 5 MINUTES
+	alert_type = /atom/movable/screen/alert/status_effect/silver_control
+	status_type = STATUS_EFFECT_REFRESH
+	var/mob/living/simple_animal/hostile/slime_blorbie/player/blorbie
+	var/datum/mind/owner_mind
+
+/datum/status_effect/silver_control/on_apply()
+	. = ..()
+	if(!owner.mind)
+		qdel(src)
+		return
+
+	blorbie = new(get_turf(owner))
+	RegisterSignal(blorbie, list(COMSIG_LIVING_DEATH, COMSIG_PARENT_QDELETING), .proc/blorbie_death)
+	owner_mind = owner.mind
+	owner_mind.transfer_to(blorbie)
+	blorbie.copy_languages(owner, LANGUAGE_MIND)
+	blorbie.faction = owner.faction.Copy()
+	ADD_TRAIT(owner, TRAIT_NO_MINDLESS_MSG, XENOBIO_TRAIT)
+
+	var/atom/movable/screen/alert/status_effect/blorbie_alert = blorbie.throw_alert(id, alert_type)
+	blorbie_alert.attached_effect = src
+
+/datum/status_effect/silver_control/on_remove()
+	. = ..()
+	owner_mind.transfer_to(owner)
+	REMOVE_TRAIT(owner, TRAIT_NO_MINDLESS_MSG, XENOBIO_TRAIT)
+	if(blorbie && !QDELETED(blorbie))
+		UnregisterSignal(blorbie, list(COMSIG_LIVING_DEATH, COMSIG_PARENT_QDELETING))
+		blorbie.death(FALSE)
+
+/datum/status_effect/silver_control/proc/blorbie_death(mob/living/dead_blorbie)
+	SIGNAL_HANDLER
+	qdel(src)
+
+/datum/status_effect/silver_control/get_examine_text()
+	return span_deadsay("[owner.p_they(TRUE)] look like [owner.p_their()] mind is somewhere else...")

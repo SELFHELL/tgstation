@@ -227,3 +227,8 @@
 	database_id = MEDAL_DEBT_EXTINGUISHED
 	icon = "outdebted"
 
+/datum/award/achievement/misc/rainbow_king
+	name = "All hail The Rainbow King"
+	desc = "Bow before our slimy overlord!"
+	database_id = MEDAL_RAINBOW_KING
+	icon = "rainbow_king"

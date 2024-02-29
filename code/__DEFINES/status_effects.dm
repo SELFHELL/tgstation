@@ -31,6 +31,7 @@
 /// If the incapacitated status effect will ignore a mob being agressively grabbed
 #define IGNORE_GRAB (1<<2)
 
+
 /// Maxamounts of fire stacks a mob can get
 #define MAX_FIRE_STACKS 20
 /// If a mob has a higher threshold than this, the icon shown will be increased to the big fire icon.
@@ -45,6 +46,8 @@
 #define STASIS_LEGION_EATEN "stasis_eaten"
 
 #define STASIS_NETPOD_EFFECT "stasis_netpod"
+
+#define STASIS_SLIME_EFFECT "stasis_slime"
 
 /// Causes the mob to become blind via the passed source
 #define become_blind(source) apply_status_effect(/datum/status_effect/grouped/blindness, source)

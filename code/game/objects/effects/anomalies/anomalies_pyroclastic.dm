@@ -31,11 +31,8 @@
 	if(istype(tile))
 		tile.atmos_spawn_air("[GAS_O2]=500;[GAS_PLASMA]=500;[TURF_TEMPERATURE(1000)]") //Make it hot and burny for the new slime
 
-	var/new_colour = pick(/datum/slime_type/red, /datum/slime_type/orange)
-	var/mob/living/simple_animal/slime/pyro = new(tile, new_colour)
-	pyro.rabid = TRUE
-	pyro.amount_grown = SLIME_EVOLUTION_THRESHOLD
-	pyro.Evolve()
+	var/mob/living/simple_animal/slime/color/fiery/S = new(T)
+	S.grow_up()
 	var/datum/action/innate/slime/reproduce/repro_action = new
 	repro_action.Grant(pyro)
 

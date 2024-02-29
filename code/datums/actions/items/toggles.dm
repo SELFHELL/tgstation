@@ -32,6 +32,9 @@
 /datum/action/item_action/toggle_mister
 	name = "Toggle Mister"
 
+/datum/action/item_action/toggle_nozzle
+	name = "Toggle Vacuum Nozzle"
+	
 /datum/action/item_action/toggle_helmet_light
 	name = "Toggle Helmet Light"
 

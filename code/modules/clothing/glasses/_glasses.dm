@@ -163,7 +163,7 @@
 	user.visible_message(span_suicide("[user] is tightening \the [src]'s straps around [user.p_their()] neck! It looks like [user.p_theyre()] trying to commit suicide!"))
 	return OXYLOSS
 
-/obj/item/clothing/glasses/science/night
+/obj/item/clothing/glasses/hud/science/night
 	name = "night vision science goggles"
 	desc = "Lets the user see in the dark and recognize chemical compounds at a glance."
 	icon_state = "scihudnight"
@@ -368,13 +368,13 @@
 	desc = "A pair of sunglasses outfitted with apparatus to scan reagents, as well as providing an innate understanding of liquid viscosity while in motion."
 	clothing_traits = list(TRAIT_BOOZE_SLIDER, TRAIT_REAGENT_SCANNER)
 
-/obj/item/clothing/glasses/sunglasses/chemical
+/obj/item/clothing/glasses/hud/science/sunglasses
 	name = "science glasses"
 	icon_state = "sunhudsci"
 	desc = "A pair of tacky purple sunglasses that allow the wearer to recognize various chemical compounds with only a glance."
 	clothing_traits = list(TRAIT_REAGENT_SCANNER, TRAIT_RESEARCH_SCANNER)
 
-/obj/item/clothing/glasses/sunglasses/chemical/add_glasses_slapcraft_component()
+/obj/item/clothing/glasses/hud/science/sunglasses/add_glasses_slapcraft_component()
 	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/scienceglassesremoval)
 
 	AddComponent(

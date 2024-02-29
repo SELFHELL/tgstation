@@ -90,6 +90,9 @@
 #define COMSIG_MOVABLE_SPACEMOVE "spacemove"
 	#define COMSIG_MOVABLE_STOP_SPACEMOVE (1<<0)
 
+/// from datum/component/dejavu/proc/rewind(): (dejavu_component)
+#define COMSIG_DEJAVU_REWIND "dejavu_rewind"
+
 /// Sent from /obj/item/radio/talk_into(): (obj/item/radio/used_radio)
 #define COMSIG_MOVABLE_USING_RADIO "movable_radio"
 	/// Return to prevent the movable from talking into the radio.

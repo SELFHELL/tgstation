@@ -325,7 +325,7 @@
 		/datum/material/plasma = SMALL_MATERIAL_AMOUNT*3.5,
 		/datum/material/uranium =HALF_SHEET_MATERIAL_AMOUNT,
 	)
-	build_path = /obj/item/clothing/glasses/science/night
+	build_path = /obj/item/clothing/glasses/hud/science/night
 	category = list(
 		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_EQUIPMENT_CHEMISTRY
 	)

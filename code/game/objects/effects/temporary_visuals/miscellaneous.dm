@@ -273,6 +273,10 @@
 	name = "emp sparks"
 	icon_state = "empdisable"
 
+/obj/effect/temp_visual/cerulean_sparkles
+	icon_state = "cerulean_sparkles"
+	duration = 6
+
 /obj/effect/temp_visual/emp/pulse
 	name = "emp pulse"
 	icon_state = "emppulse"
@@ -427,6 +431,9 @@
 	pixel_x = rand(-4,0)
 	pixel_y = rand(8,12)
 	animate(src, pixel_y = pixel_y + 16, alpha = 0, time = duration)
+
+/obj/effect/temp_visual/annoyed/slime
+	icon_state = "slime_annoyed"
 
 /obj/effect/temp_visual/bleed
 	name = "bleed"
@@ -586,6 +593,43 @@
 	icon = 'icons/effects/weather_effects.dmi'
 	duration = 3.2 SECONDS
 
+/obj/effect/temp_visual/arrow_up
+	icon_state = "arrow_up"
+	duration = 12
+	layer = BELOW_MOB_LAYER
+
+/obj/effect/temp_visual/arrow_up/Initialize(mapload)
+	. = ..()
+	animate(src, pixel_y = 24, alpha = 0, time = duration)
+
+/obj/effect/temp_visual/arrow_down
+	icon_state = "arrow_down"
+	duration = 12
+	layer = BELOW_MOB_LAYER
+
+/obj/effect/temp_visual/arrow_down/Initialize(mapload)
+	. = ..()
+	pixel_y = 24
+	animate(src, pixel_y = 0, alpha = 0, time = duration)
+
+/obj/effect/temp_visual/item_shadow
+	icon_state = "item_shadow"
+	duration = 17
+	layer = BELOW_OPEN_DOOR_LAYER
+
+/obj/effect/temp_visual/slime_plus
+	icon_state = "purple_plus"
+	duration = 12
+	layer = ABOVE_ALL_MOB_LAYER
+	plane = ABOVE_GAME_PLANE
+
+/obj/effect/temp_visual/slime_plus/Initialize(mapload)
+	. = ..()
+	animate(src, pixel_y = 24, alpha = 0, time = duration)
+
+/obj/effect/temp_visual/slime_plus/cerulean
+	icon_state = "cerulean_plus"
+
 /obj/effect/temp_visual/sonar_ping
 	duration = 3 SECONDS
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
@@ -709,3 +753,4 @@
 		flags = ANIMATION_RELATIVE,
 	)
 	return ..()
+
