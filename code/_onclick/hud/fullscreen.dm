@@ -231,4 +231,3 @@
 	icon_state = "noise"
 	color = "#04a8d1"
 	alpha = 80
-
