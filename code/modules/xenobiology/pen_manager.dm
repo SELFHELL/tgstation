@@ -90,7 +90,7 @@
 	name = "slime pen destignation field"
 	color = COLOR_NAVY
 
-z
+/obj/machinery/pen_manager
 	name = "pen manager"
 	desc = "A wall-mounted console used to managing slimes."
 	icon = 'icons/obj/xenobiology/machinery.dmi'

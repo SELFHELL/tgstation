@@ -30,7 +30,7 @@
 
 // The pod itself
 
-ss
+/obj/machinery/atmospherics/components/binary/xenoflora_pod
 	name = "xenoflora pod"
 	desc = "A large hydroponics tray with an extendable glass dome in case your green friends need special atmosphere."
 	icon = 'icons/obj/xenobiology/xenoflora_pod.dmi'
