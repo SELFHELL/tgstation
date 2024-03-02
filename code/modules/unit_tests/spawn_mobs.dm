@@ -3,8 +3,8 @@
 
 /datum/unit_test/spawn_mobs/Run()
 	for(var/mob/living/simple_animal/animal as anything in subtypesof(/mob/living/simple_animal))
-		if (initial(animal.gold_core_spawnable))
+		if (initial(animal.mob_spawnable_type))
 			allocate(animal)
 	for(var/mob/living/basic/basic_animal as anything in subtypesof(/mob/living/basic))
-		if (initial(basic_animal.gold_core_spawnable))
+		if (initial(basic_animal.mob_spawnable_type))
 			allocate(basic_animal)

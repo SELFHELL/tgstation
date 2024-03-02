@@ -38,5 +38,25 @@
 	light_color = LIGHT_COLOR_FIRE
 	light_range = LIGHT_RANGE_FIRE
 
+/obj/effect/hotspot/oil
+	light_color = LIGHT_COLOR_HALOGEN
+
+/obj/effect/hotspot/oil/Initialize(mapload, starting_volume, starting_temperature)
+	. = ..()
+	color = color_matrix_add(color_matrix_saturation(0.25), list(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0.05,0.05,0.05,0))
+
+/obj/effect/hotspot/oil/handle_burning(turf/open/location)
+	for(var/atom/target as anything in location)
+		if(QDELETED(target) || target == src)
+			continue
+
+		if(!isliving(target) || isanimal(target))
+			target.fire_act(temperature, volume)
+			continue
+
+		var/mob/living/victim = target
+		victim.adjust_fire_stacks(3, /datum/status_effect/fire_handler/fire_stacks/oil) //Sticky oil fire affects even sillycones
+		victim.ignite_mob()
+
 /obj/effect/dummy/lighting_obj/moblight/species
 	name = "species lighting"

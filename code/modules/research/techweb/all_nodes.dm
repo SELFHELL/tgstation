@@ -491,7 +491,7 @@
 		"griddle",
 		"microwave",
 		"microwave_engineering",
-		"monkey_recycler",
+		"biomass_recycler",
 		"oven",
 		"processor",
 		"range", // should be in a further node, probably

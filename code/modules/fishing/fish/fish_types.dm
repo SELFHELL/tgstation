@@ -360,7 +360,7 @@
 	stable_population = 4
 	health = 150
 	fillet_type = /obj/item/slime_extract/grey
-	grind_results = list(/datum/reagent/toxin/slimejelly = 10)
+	grind_results = list(/datum/reagent/toxin/slime_jelly = 10)
 	fish_traits = list(/datum/fish_trait/toxin_immunity, /datum/fish_trait/crossbreeder)
 	favorite_bait = list(
 		list(

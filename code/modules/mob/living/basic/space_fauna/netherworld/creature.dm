@@ -12,7 +12,7 @@
 	speed = 2
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
-	gold_core_spawnable = HOSTILE_SPAWN
+	mob_spawnable_type = HOSTILE_SPAWN
 	attack_sound = 'sound/weapons/bite.ogg'
 	attack_vis_effect = ATTACK_EFFECT_BITE
 	melee_attack_cooldown = 1 SECONDS

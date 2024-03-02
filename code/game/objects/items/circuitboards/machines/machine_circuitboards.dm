@@ -989,10 +989,10 @@
 		/datum/stock_part/micro_laser = 1,
 		/obj/item/stack/sheet/glass = 1)
 
-/obj/item/circuitboard/machine/monkey_recycler
-	name = "Monkey Recycler"
+/obj/item/circuitboard/machine/biomass_recycler
+	name = "Biomass Recycler"
 	greyscale_colors = CIRCUIT_COLOR_SCIENCE
-	build_path = /obj/machinery/monkey_recycler
+	build_path = /obj/machinery/biomass_recycler
 	req_components = list(
 		/datum/stock_part/matter_bin = 1,
 		/datum/stock_part/servo = 1)
@@ -1078,6 +1078,26 @@
 		/datum/stock_part/micro_laser = 1,
 		/obj/item/stack/cable_coil = 2,
 	)
+
+
+/obj/item/circuitboard/machine/slime_market_pad
+	name = "Intergalactic Market Pad (Machine Board)"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/slime_market_pad
+	req_components = list(
+		/obj/item/stock_parts/manipulator = 2,
+		/obj/item/stack/sheet/glass = 1)
+	def_components = list(/obj/item/stack/ore/bluespace_crystal = /obj/item/stack/ore/bluespace_crystal/artificial)
+
+/obj/item/circuitboard/machine/slime_bounty_pad
+	name = "Intergalactic Bounty Pad (Machine Board)"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/slime_market_pad
+	req_components = list(
+		/obj/item/stack/ore/bluespace_crystal = 2,
+		/obj/item/stock_parts/capacitor = 2,
+		/obj/item/stack/sheet/glass = 1)
+	def_components = list(/obj/item/stack/ore/bluespace_crystal = /obj/item/stack/ore/bluespace_crystal/artificial)
 
 /obj/item/circuitboard/machine/mechpad
 	name = "Mecha Orbital Pad"

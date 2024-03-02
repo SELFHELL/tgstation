@@ -289,12 +289,12 @@ GLOBAL_LIST_EMPTY(station_turfs)
  *
  * Works similar to is_blocked_turf(), but ignores climbables and has less options. Primarily added for jaunting checks
  */
-/turf/proc/is_blocked_turf_ignore_climbable()
+/turf/proc/is_blocked_turf_ignore_climbable(exclude_mobs = FALSE)
 	if(density)
 		return TRUE
 
 	for(var/atom/movable/atom_content as anything in contents)
-		if(atom_content.density && !(atom_content.flags_1 & ON_BORDER_1) && !HAS_TRAIT(atom_content, TRAIT_CLIMBABLE))
+		if(atom_content.density && !(atom_content.flags_1 & ON_BORDER_1) && !HAS_TRAIT(atom_content, TRAIT_CLIMBABLE) && (!exclude_mobs || !ismob(atom_content)))
 			return TRUE
 	return FALSE
 

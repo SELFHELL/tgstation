@@ -164,7 +164,7 @@
 "ex" = (
 /obj/structure/table/reinforced/rglass,
 /obj/item/clothing/gloves/latex/nitrile,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/science,
 /turf/open/floor/mineral/titanium/tiled/blue,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "eB" = (
@@ -1882,7 +1882,7 @@
 /turf/open/floor/mineral/titanium/tiled/white,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "RB" = (
-/obj/machinery/monkey_recycler,
+/obj/machinery/biomass_recycler,
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "RE" = (
@@ -2035,7 +2035,7 @@
 	},
 /obj/item/clothing/suit/toggle/labcoat,
 /obj/item/clothing/gloves/latex,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/science,
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/hilbertresearchfacility)
 "TE" = (

@@ -656,3 +656,12 @@
 /datum/chemical_reaction/drink/blue_hawaiian
 	results = list(/datum/reagent/consumable/ethanol/blue_hawaiian = 5)
 	required_reagents = list(/datum/reagent/consumable/ethanol/coconut_rum = 2, /datum/reagent/consumable/pineapplejuice = 1, /datum/reagent/consumable/lemonjuice = 1, /datum/reagent/consumable/ethanol/curacao = 1)
+
+/datum/chemical_reaction/drink/slime_queen
+	results = list(/datum/reagent/consumable/ethanol/slime_queen = 3)
+	required_reagents = list(/datum/reagent/toxin/slime_jelly/pink = 1, /datum/reagent/consumable/berryjuice = 1, /datum/reagent/consumable/ethanol/vodka = 1)
+	mix_message = "Purple swirles appear in the drink as it finishes mixing."
+
+/datum/chemical_reaction/drink/limonade
+	results = list(/datum/reagent/consumable/limonade = 3)
+	required_reagents = list(/datum/reagent/consumable/limonjuice = 1, /datum/reagent/water = 1, /datum/reagent/gunpowder = 1)

@@ -71,7 +71,7 @@
 		/datum/reagent/drug/krokodil,
 		/datum/reagent/toxin/plasma,
 		/datum/reagent/consumable/coco,
-		/datum/reagent/toxin/slimejelly,
+		/datum/reagent/toxin/slime_jelly,
 		/datum/reagent/consumable/banana,
 		/datum/reagent/consumable/berryjuice,
 		/datum/reagent/medicine/omnizine,
@@ -363,7 +363,7 @@
 /obj/item/food/donut/jelly/slimejelly
 	name = "jelly donut"
 	desc = "You jelly?"
-	extra_reagent = /datum/reagent/toxin/slimejelly
+	extra_reagent = /datum/reagent/toxin/slime_jelly
 	foodtypes = JUNKFOOD | GRAIN | FRIED | TOXIC | SUGAR | BREAKFAST
 
 /obj/item/food/donut/jelly/slimejelly/plain

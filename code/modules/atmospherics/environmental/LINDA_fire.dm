@@ -153,9 +153,13 @@
 			volume += cached_results[reaction] * FIRE_GROWTH_RATE
 		temperature = reference.temperature
 
-	// Handles the burning of atoms.
+	handle_burning(location)
+
+/// Handles burning of atoms
+/obj/effect/hotspot/proc/handle_burning(turf/open/location)
 	if(cold_fire)
 		return
+
 	for(var/A in location)
 		var/atom/AT = A
 		if(!QDELETED(AT) && AT != src)

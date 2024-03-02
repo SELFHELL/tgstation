@@ -997,7 +997,7 @@
 	pixel_y = 2
 	},
 /obj/item/reagent_containers/dropper,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/science,
 /obj/structure/sign/warning/chem_diamond/directional/north,
 /turf/open/floor/iron/white,
 /area/ruin/space/has_grav/dangerous_research/medical)

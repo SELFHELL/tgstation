@@ -1838,7 +1838,7 @@
 /obj/structure/rack,
 /obj/item/clothing/mask/gas,
 /obj/machinery/airalarm/directional/north,
-/obj/item/clothing/glasses/science{
+/obj/item/clothing/glasses/hud/scienceence{
 	pixel_x = 4;
 	pixel_y = -4
 	},
@@ -3076,7 +3076,7 @@
 /area/station/maintenance/starboard/fore)
 "aXY" = (
 /obj/structure/rack,
-/obj/item/circuitboard/machine/monkey_recycler,
+/obj/item/circuitboard/machine/biomass_recycler,
 /obj/structure/sign/poster/random/directional/east,
 /turf/open/floor/plating,
 /area/station/maintenance/port/fore)
@@ -4000,11 +4000,11 @@
 "blU" = (
 /obj/structure/table/glass,
 /obj/item/storage/box/syringes,
-/obj/item/clothing/glasses/science{
+/obj/item/clothing/glasses/hud/scienceence{
 	pixel_x = 2;
 	pixel_y = 4
 	},
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceence,
 /obj/machinery/requests_console/directional/south{
 	department = "Chemistry";
 	name = "Chemistry Requests Console"
@@ -24412,7 +24412,7 @@
 /obj/item/clothing/gloves/latex,
 /obj/item/healthanalyzer,
 /obj/item/clothing/glasses/hud/health,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceence,
 /obj/effect/turf_decal/trimline/green/filled/line{
 	dir = 4
 	},
@@ -39824,11 +39824,11 @@
 "mjO" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/structure/table/reinforced,
-/obj/item/clothing/glasses/science{
+/obj/item/clothing/glasses/hud/scienceence{
 	pixel_x = -4;
 	pixel_y = 4
 	},
-/obj/item/clothing/glasses/science{
+/obj/item/clothing/glasses/hud/scienceence{
 	pixel_x = 4;
 	pixel_y = -4
 	},
@@ -68578,8 +68578,8 @@
 	pixel_x = -4;
 	pixel_y = 4
 	},
-/obj/item/clothing/glasses/science,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceence,
+/obj/item/clothing/glasses/hud/scienceence,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
@@ -68905,7 +68905,7 @@
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/underground/explored)
 "vfq" = (
-/obj/machinery/monkey_recycler,
+/obj/machinery/biomass_recycler,
 /obj/structure/cable,
 /obj/effect/turf_decal/stripes/line{
 	dir = 5

@@ -707,14 +707,14 @@
 
 
 /datum/chemical_reaction/slimejelly
-	results = list(/datum/reagent/toxin/slimejelly = 5)
+	results = list(/datum/reagent/toxin/slime_jelly = 5)
 	required_reagents = list(/datum/reagent/fuel/oil = 3, /datum/reagent/uranium/radium = 2, /datum/reagent/consumable/tinlux =1)
 	required_container = /obj/item/food/grown/mushroom/glowshroom
 	mix_message = "The mushroom's insides bubble and pop and it becomes very limp."
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_PLANT | REACTION_TAG_DAMAGING | REACTION_TAG_TOXIN | REACTION_TAG_SLIME
 
 /datum/chemical_reaction/slime_extractification
-	required_reagents = list(/datum/reagent/toxin/slimejelly = 30, /datum/reagent/consumable/frostoil = 5, /datum/reagent/toxin/plasma = 5)
+	required_reagents = list(/datum/reagent/toxin/slime_jelly = 30, /datum/reagent/consumable/frostoil = 5, /datum/reagent/toxin/plasma = 5)
 	mix_message = "The mixture condenses into a ball."
 	reaction_flags = REACTION_INSTANT
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_SLIME

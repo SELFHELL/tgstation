@@ -46,17 +46,21 @@
 /obj/item/t_scanner/proc/scan()
 	t_ray_scan(loc)
 
+
 /proc/t_ray_scan(mob/viewer, flick_time = 8, distance = 3)
 	if(!ismob(viewer) || !viewer.client)
 		return
 	var/list/t_ray_images = list()
-	for(var/obj/O in orange(distance, viewer) )
-		if(HAS_TRAIT(O, TRAIT_T_RAY_VISIBLE))
-			var/image/I = new(loc = get_turf(O))
-			var/mutable_appearance/MA = new(O)
-			MA.alpha = 128
-			MA.dir = O.dir
-			I.appearance = MA
-			t_ray_images += I
+		for(var/obj/scanning in orange(distance, viewer))
+			if(!HAS_TRAIT(scanning, TRAIT_T_RAY_VISIBLE))
+				continue
+
+			var/image/scan_image = new(loc = get_turf(scanning))
+			var/mutable_appearance/scan_mutable = new(scanning)
+			scan_mutable.alpha = 128
+			scan_mutable.dir = scanning.dir
+			scan_image.appearance = scan_mutable
+			t_ray_images += scan_image
+
 	if(t_ray_images.len)
 		flick_overlay_global(t_ray_images, list(viewer.client), flick_time)

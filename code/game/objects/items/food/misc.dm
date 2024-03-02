@@ -716,3 +716,14 @@
 	foodtypes = VEGETABLES | GRAIN
 	w_class = WEIGHT_CLASS_TINY
 	crafting_complexity = FOOD_COMPLEXITY_4
+
+
+/obj/item/food/fried_wings
+	name = "fried greeblefly wings"
+	desc = "A pair of deep fried greeblefly wings with a grassy aroma."
+	icon_state = "fried_wings"
+	food_reagents = list(/datum/reagent/consumable/nutriment/protein = 4, /datum/reagent/consumable/nutriment/vitamin = 2)
+	tastes = list("grass" = 3, "fried batter" = 1)
+	foodtypes = MEAT | FRIED | BUGS
+	junkiness = 25
+	w_class = WEIGHT_CLASS_SMALL

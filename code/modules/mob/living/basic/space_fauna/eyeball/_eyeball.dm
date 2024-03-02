@@ -6,7 +6,7 @@
 	icon_living = "eyeball"
 	icon_gib = ""
 	gender = NEUTER
-	gold_core_spawnable = HOSTILE_SPAWN
+	mob_spawnable_type = HOSTILE_SPAWN
 	basic_mob_flags = DEL_ON_DEATH
 	gender = NEUTER
 	mob_biotypes = MOB_ORGANIC

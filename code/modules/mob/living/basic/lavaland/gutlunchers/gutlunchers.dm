@@ -23,7 +23,7 @@
 	response_harm_simple = "squish"
 	friendly_verb_continuous = "pinches"
 	friendly_verb_simple = "pinch"
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 	death_message = "is pulped into bugmash."
 	greyscale_config = /datum/greyscale_config/gutlunch
 	///possible colors we can have

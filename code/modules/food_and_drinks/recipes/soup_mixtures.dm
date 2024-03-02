@@ -748,7 +748,7 @@
 	)
 	results = list(
 		/datum/reagent/consumable/nutriment/soup/slime = 30,
-		/datum/reagent/toxin/slimejelly = 20,
+		/datum/reagent/toxin/slime_jelly = 20,
 		// Comes out of thin air, as none of our ingredients contain nutrients naturally.
 		/datum/reagent/consumable/nutriment = 7,
 		/datum/reagent/consumable/nutriment/vitamin = 7,
@@ -763,7 +763,7 @@
 	required_other = FALSE
 	required_reagents = list(
 		/datum/reagent/water = 40,
-		/datum/reagent/toxin/slimejelly = 20,
+		/datum/reagent/toxin/slime_jelly = 20,
 	)
 	required_ingredients = null
 
@@ -836,7 +836,7 @@
 		/datum/reagent/medicine/oculine,
 		/datum/reagent/medicine/omnizine,
 		/datum/reagent/toxin,
-		/datum/reagent/toxin/slimejelly,
+		/datum/reagent/toxin/slime_jelly,
 	)
 
 /datum/chemical_reaction/food/soup/mysterysoup/reaction_finish(datum/reagents/holder, datum/equilibrium/reaction, react_vol)

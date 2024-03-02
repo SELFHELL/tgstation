@@ -5795,7 +5795,7 @@
 "bsX" = (
 /obj/structure/table/reinforced/rglass,
 /obj/item/clothing/gloves/latex,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceenceenceence/science,
 /obj/item/healthanalyzer,
 /obj/item/clothing/glasses/hud/health,
 /obj/machinery/requests_console/directional/north{
@@ -14108,7 +14108,7 @@
 /obj/effect/turf_decal/siding/wideplating,
 /obj/structure/table/reinforced,
 /obj/item/stack/sheet/mineral/plasma/five,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceenceenceence/science,
 /obj/machinery/light/cold/directional/west,
 /turf/open/floor/iron/dark/textured,
 /area/station/medical/pharmacy)
@@ -19739,7 +19739,7 @@
 /obj/structure/table/glass,
 /obj/item/cultivator,
 /obj/item/stack/cable_coil,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceenceenceence/science,
 /turf/open/floor/iron/white,
 /area/station/science/cytology)
 "ffv" = (
@@ -22318,7 +22318,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/station/commons/locker)
 "fOH" = (
-/obj/machinery/monkey_recycler,
+/obj/machinery/biomass_recyclerrrrrrrrr,
 /turf/open/floor/circuit,
 /area/station/science/xenobiology)
 "fOI" = (
@@ -74673,7 +74673,7 @@
 "tld" = (
 /obj/structure/table/reinforced,
 /obj/item/stack/sheet/mineral/plasma/five,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceenceenceence/science,
 /turf/open/floor/iron/dark/textured,
 /area/station/medical/pharmacy)
 "tlf" = (
@@ -90179,7 +90179,7 @@
 	},
 /obj/structure/table/reinforced,
 /obj/item/radio/intercom/directional/west,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceenceenceence/science,
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
 "xfE" = (

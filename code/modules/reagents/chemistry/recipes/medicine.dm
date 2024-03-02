@@ -300,7 +300,7 @@
 
 /datum/chemical_reaction/medicine/pyroxadone
 	results = list(/datum/reagent/medicine/pyroxadone = 2)
-	required_reagents = list(/datum/reagent/medicine/cryoxadone = 1, /datum/reagent/toxin/slimejelly = 1)
+	required_reagents = list(/datum/reagent/medicine/cryoxadone = 1, /datum/reagent/toxin/slime_jelly = 1)
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_BRUTE |REACTION_TAG_BURN | REACTION_TAG_TOXIN | REACTION_TAG_OXY
 
 /datum/chemical_reaction/medicine/haloperidol
@@ -310,7 +310,7 @@
 
 /datum/chemical_reaction/medicine/regen_jelly
 	results = list(/datum/reagent/medicine/regen_jelly = 2)
-	required_reagents = list(/datum/reagent/medicine/omnizine = 1, /datum/reagent/toxin/slimejelly = 1)
+	required_reagents = list(/datum/reagent/medicine/omnizine = 1, /datum/reagent/toxin/slime_jelly = 1)
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_BRUTE |REACTION_TAG_BURN | REACTION_TAG_TOXIN | REACTION_TAG_OXY
 
 /datum/chemical_reaction/medicine/higadrite

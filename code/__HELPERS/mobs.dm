@@ -410,7 +410,7 @@ GLOBAL_LIST_EMPTY(species_list)
 		else
 			to_chat(M, message, avoid_highlighting = speaker_key == M.key)
 
-//Used in chemical_mob_spawn. Generates a random mob based on a given gold_core_spawnable value.
+//Used in chemical_mob_spawn. Generates a random mob based on a given mob_spawnable_type value.
 /proc/create_random_mob(spawn_location, mob_class = HOSTILE_SPAWN)
 	var/static/list/mob_spawn_meancritters = list() // list of possible hostile mobs
 	var/static/list/mob_spawn_nicecritters = list() // and possible friendly mobs
@@ -418,13 +418,13 @@ GLOBAL_LIST_EMPTY(species_list)
 	if(mob_spawn_meancritters.len <= 0 || mob_spawn_nicecritters.len <= 0)
 		for(var/T in typesof(/mob/living/simple_animal))
 			var/mob/living/simple_animal/SA = T
-			switch(initial(SA.gold_core_spawnable))
+			switch(initial(SA.mob_spawnable_type))
 				if(HOSTILE_SPAWN)
 					mob_spawn_meancritters += T
 				if(FRIENDLY_SPAWN)
 					mob_spawn_nicecritters += T
 		for(var/mob/living/basic/basic_mob as anything in typesof(/mob/living/basic))
-			switch(initial(basic_mob.gold_core_spawnable))
+			switch(initial(basic_mob.mob_spawnable_type))
 				if(HOSTILE_SPAWN)
 					mob_spawn_meancritters += basic_mob
 				if(FRIENDLY_SPAWN)

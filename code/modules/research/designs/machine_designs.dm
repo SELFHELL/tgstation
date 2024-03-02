@@ -562,11 +562,11 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SERVICE
 
-/datum/design/board/monkey_recycler
+/datum/design/board/biomass_recycler
 	name = "Monkey Recycler Board"
 	desc = "The circuit board for a monkey recycler."
-	id = "monkey_recycler"
-	build_path = /obj/item/circuitboard/machine/monkey_recycler
+	id = "biomass_recycler"
+	build_path = /obj/item/circuitboard/machine/biomass_recycler
 	category = list(
 		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_RESEARCH
 	)

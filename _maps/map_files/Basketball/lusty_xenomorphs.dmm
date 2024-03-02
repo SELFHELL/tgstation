@@ -122,7 +122,7 @@
 /obj/structure/alien/weeds,
 /obj/structure/table/reinforced,
 /obj/item/clothing/mask/gas,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/science,
 /turf/open/floor/iron/white,
 /area/centcom/basketball)
 "kc" = (
@@ -533,7 +533,7 @@
 /turf/open/floor/iron/white,
 /area/centcom/basketball)
 "Tc" = (
-/obj/machinery/monkey_recycler,
+/obj/machinery/biomass_recycler,
 /turf/open/floor/iron/white,
 /area/centcom/basketball)
 "Uq" = (

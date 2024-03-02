@@ -954,7 +954,7 @@
 	food_reagents = list(
 		/datum/reagent/consumable/nutraslop = 8,
 		/datum/reagent/consumable/capsaicin = 2,
-		/datum/reagent/toxin/slimejelly = 4,
+		/datum/reagent/toxin/slime_jelly = 4,
 	)
 	tastes = list("grit" = 1, "slime" = 1, "gristle" = 1, "rice" = 1, "Mystery Food X" = 1)
 	foodtypes = GROSS | GRAIN | TOXIC

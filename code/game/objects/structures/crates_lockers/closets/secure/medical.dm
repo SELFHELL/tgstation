@@ -138,4 +138,4 @@
 	new /obj/item/reagent_containers/dropper(src)
 	new /obj/item/storage/box/syringes/variety(src)
 	new /obj/item/storage/box/beakers/variety(src)
-	new /obj/item/clothing/glasses/science(src)
+	new /obj/item/clothing/glasses/hud/science(src)

@@ -13564,7 +13564,7 @@
 /obj/structure/table,
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/mask/gas,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceence,
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 8
 	},
@@ -24463,8 +24463,8 @@
 "gaC" = (
 /obj/effect/turf_decal/siding/yellow,
 /obj/structure/table/glass,
-/obj/item/clothing/glasses/science,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceence,
+/obj/item/clothing/glasses/hud/scienceenceence,
 /obj/item/stack/cable_coil,
 /obj/item/stack/cable_coil,
 /obj/item/screwdriver{
@@ -29035,10 +29035,10 @@
 /obj/structure/table,
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/gloves/latex,
-/obj/item/clothing/glasses/science{
+/obj/item/clothing/glasses/hud/scienceenceence{
 	pixel_y = 3
 	},
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceence,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron,
 /area/station/medical/pharmacy)
@@ -70853,7 +70853,7 @@
 	pixel_y = 3
 	},
 /obj/item/clothing/gloves/latex,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceence,
 /obj/item/clothing/glasses/hud/health,
 /turf/open/floor/iron,
 /area/station/medical/virology)
@@ -75825,7 +75825,7 @@
 "sTG" = (
 /obj/structure/table,
 /obj/item/clothing/gloves/latex,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceence,
 /obj/structure/sign/poster/official/science/directional/west,
 /turf/open/floor/iron/white,
 /area/station/science/lobby)
@@ -79720,7 +79720,7 @@
 /obj/structure/extinguisher_cabinet/directional/south,
 /obj/structure/table/reinforced,
 /obj/item/wrench,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceenceence,
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /obj/machinery/light/directional/south,
@@ -89759,7 +89759,7 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "wsd" = (
-/obj/machinery/monkey_recycler,
+/obj/machinery/biomass_recycler,
 /obj/effect/turf_decal/bot_red,
 /turf/open/floor/iron/dark,
 /area/station/science/xenobiology)

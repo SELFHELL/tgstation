@@ -23,7 +23,7 @@
 	response_harm_continuous = "kicks"
 	response_harm_simple = "kick"
 	mobility_flags = MOBILITY_FLAGS_REST_CAPABLE_DEFAULT
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 	collar_icon_state = "cat"
 	has_collar_resting_icon_state = TRUE
 	can_be_held = TRUE
@@ -194,7 +194,7 @@
 /mob/living/basic/pet/cat/_proc
 	name = "Proc"
 	gender = MALE
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	unique_pet = TRUE
 
 /mob/living/basic/pet/cat/jerry //Holy shit we left jerry on donut ~ Arcane ~Fikou

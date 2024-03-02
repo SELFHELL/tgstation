@@ -164,7 +164,7 @@
 		/datum/reagent/hair_dye,\
 		/datum/reagent/consumable/honey,\
 		/datum/reagent/consumable/frostoil,\
-		/datum/reagent/toxin/slimejelly,\
+		/datum/reagent/toxin/slime_jelly,\
 		/datum/reagent/teslium/energized_jelly,\
 		/datum/reagent/toxin/mimesbane,\
 		/datum/reagent/medicine/strange_reagent,\

@@ -140,38 +140,6 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	sharpness = SHARP_EDGED
 
-/obj/item/clothing/glasses/science
-	name = "science goggles"
-	desc = "A pair of snazzy goggles used to protect against chemical spills. Fitted with an analyzer for scanning items and reagents."
-	icon_state = "purple"
-	inhand_icon_state = "glasses"
-	glass_colour_type = /datum/client_colour/glass_colour/purple
-	flags_cover = GLASSESCOVERSEYES
-	resistance_flags = ACID_PROOF
-	armor_type = /datum/armor/glasses_science
-	clothing_traits = list(TRAIT_REAGENT_SCANNER, TRAIT_RESEARCH_SCANNER)
-
-/datum/armor/glasses_science
-	fire = 80
-	acid = 100
-
-/obj/item/clothing/glasses/science/item_action_slot_check(slot)
-	if(slot & ITEM_SLOT_EYES)
-		return 1
-
-/obj/item/clothing/glasses/science/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] is tightening \the [src]'s straps around [user.p_their()] neck! It looks like [user.p_theyre()] trying to commit suicide!"))
-	return OXYLOSS
-
-/obj/item/clothing/glasses/hud/science/night
-	name = "night vision science goggles"
-	desc = "Lets the user see in the dark and recognize chemical compounds at a glance."
-	icon_state = "scihudnight"
-	flash_protect = FLASH_PROTECTION_SENSITIVE
-	// Real vivid purple
-	color_cutoffs = list(50, 10, 30)
-	glass_colour_type = /datum/client_colour/glass_colour/green
-
 /obj/item/clothing/glasses/night
 	name = "night vision goggles"
 	desc = "You can totally see in the dark now!"

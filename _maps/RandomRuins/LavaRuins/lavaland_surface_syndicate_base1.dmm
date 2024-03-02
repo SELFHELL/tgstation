@@ -213,8 +213,8 @@
 /obj/structure/table/reinforced,
 /obj/item/book/manual/wiki/chemistry,
 /obj/item/book/manual/wiki/chemistry,
-/obj/item/clothing/glasses/science,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/science,
+/obj/item/clothing/glasses/hud/science,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/ruin/syndicate_lava_base/chemistry)
@@ -922,7 +922,7 @@
 /obj/item/pen/red,
 /obj/item/restraints/handcuffs,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/science,
 /turf/open/floor/iron/white/side,
 /area/ruin/syndicate_lava_base/virology)
 "hu" = (

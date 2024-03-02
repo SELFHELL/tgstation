@@ -18,7 +18,7 @@
 	mutantheart = null
 	mutantlungs = null
 	mutantbrain = /obj/item/organ/internal/brain/abductor
-	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
+	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN
 	ass_image = 'icons/ass/assgrey.png'
 
 	bodypart_overrides = list(

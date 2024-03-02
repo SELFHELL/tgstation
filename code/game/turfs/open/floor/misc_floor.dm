@@ -327,3 +327,65 @@
 
 /turf/open/floor/iron/tgmcemblem/center
 	icon_state = "tgmc_center"
+
+/turf/open/floor/pyrite
+	name = "pyrite floor"
+	icon_state = "pyrite"
+	floor_tile = /obj/item/stack/tile/pyrite
+
+/turf/open/floor/pyrite/Initialize(mapload)
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/turf/open/floor/pyrite/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
+/turf/open/floor/pyrite/process(delta_time)
+	for(var/obj/item/grilling in src)
+		if(SEND_SIGNAL(grilling, COMSIG_ITEM_GRILLED, src, delta_time) & COMPONENT_HANDLED_GRILLING)
+			continue
+
+		grilling.fire_act(500, 100)
+
+/turf/open/floor/pyrite/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	if(isobj(arrived))
+		arrived.fire_act(1000, 100)
+		return
+
+	if(!isliving(arrived))
+		return
+
+	var/mob/living/victim = arrived
+	if(ishuman(arrived) && victim.body_position == STANDING_UP)
+		var/mob/living/carbon/human/human_victim = victim
+		var/obscured = human_victim.check_obscured_slots(TRUE)
+		var/obj/item/clothing/leg_clothes = null
+		if(human_victim.shoes && !(obscured & ITEM_SLOT_FEET))
+			leg_clothes = human_victim.shoes
+		else if(human_victim.wear_suit && ((human_victim.wear_suit.body_parts_covered & FEET) || (human_victim.wear_suit.body_parts_covered & LEGS)))
+			leg_clothes = human_victim.wear_suit
+		else if(human_victim.w_uniform && ((human_victim.w_uniform.body_parts_covered & FEET) || (human_victim.w_uniform.body_parts_covered & LEGS)))
+			leg_clothes = human_victim.w_uniform
+
+		if(leg_clothes)
+			leg_clothes.fire_act(1000, 100)
+			return
+
+		var/leg_damage = FALSE
+		for(var/body_zone in list(BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
+			var/obj/item/bodypart/leg = human_victim.get_bodypart(body_zone)
+			if(!leg)
+				continue
+			leg_damage = TRUE
+			leg.receive_damage(0, 5)
+
+		if(leg_damage)
+			to_chat(human_victim, span_danger("[src] burns your feet as you step onto it!"))
+			playsound(src, 'sound/machines/grill/grillsizzle.ogg', 25)
+			return
+
+	victim.adjustFireLoss(15)
+	to_chat(victim, span_danger("[src] burns you as you move onto it!"))
+	playsound(src, 'sound/machines/grill/grillsizzle.ogg', 25)

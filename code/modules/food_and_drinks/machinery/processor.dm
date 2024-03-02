@@ -191,6 +191,7 @@
 	name = "slime processor"
 	desc = "An industrial grinder with a sticker saying appropriated for science department. Keep hands clear of intake area while operating."
 	circuit = /obj/item/circuitboard/machine/processor/slime
+	var/leftover_cores = list()
 
 /obj/machinery/processor/slime/adjust_item_drop_location(atom/movable/atom_to_drop)
 	var/static/list/slimecores = subtypesof(/obj/item/slime_extract)
@@ -235,11 +236,23 @@
 		processed_slime.forceMove(drop_location())
 		processed_slime.balloon_alert_to_viewers("crawls free")
 		return
+	var/core_amount = C + (rating_amount - 1) / 2
+		if(core_amount % 1 > 0)
+			if(S.slime_color.coretype in leftover_cores)
+				core_amount += 0.5
+				leftover_cores -= S.slime_color.coretype
+			else
+				core_amount -= 0.5
+				leftover_cores += S.slime_color.coretype
+
+		for(var/i in 1 to core_amount)
+			var/atom/movable/item = new S.slime_color.coretype(drop_location())
+
 	var/core_count = processed_slime.cores
 	for(var/i in 1 to (core_count+rating_amount-1))
 		var/atom/movable/item = new processed_slime.slime_type.core_type(drop_location())
 		adjust_item_drop_location(item)
-		SSblackbox.record_feedback("tally", "slime_core_harvested", 1, processed_slime.slime_type.colour)
+		SSblackbox.record_feedback("tally", "slime_core_harvested", 1, S.slime_color.color)
 	return ..()
 
 #undef PROCESSOR_SELECT_RECIPE

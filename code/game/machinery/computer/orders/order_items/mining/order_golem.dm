@@ -6,7 +6,7 @@
 	cost_per_order = 200
 
 /datum/orderable_item/golem/science_goggles
-	item_path = /obj/item/clothing/glasses/science
+	item_path = /obj/item/clothing/glasses/hud/science
 	cost_per_order = 200
 
 /datum/orderable_item/golem/monkeycubes

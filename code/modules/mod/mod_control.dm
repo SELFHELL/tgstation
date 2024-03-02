@@ -743,7 +743,7 @@
 		return
 	overslotting_parts[source] = null
 
-/obj/item/mod/control/proc/on_potion(atom/movable/source, obj/item/slimepotion/speed/speed_potion, mob/living/user)
+/obj/item/mod/control/proc/on_potion(atom/movable/source, obj/item/slime_potion/speed/speed_potion, mob/living/user)
 	SIGNAL_HANDLER
 
 	if(slowdown_inactive <= 0)

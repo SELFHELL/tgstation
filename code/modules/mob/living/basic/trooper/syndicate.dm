@@ -236,7 +236,7 @@
 	limb_destroyer = 1
 	speak_emote = list("states")
 	bubble_icon = "syndibot"
-	gold_core_spawnable = HOSTILE_SPAWN
+	mob_spawnable_type = HOSTILE_SPAWN
 	death_message = "is smashed into pieces!"
 	ai_controller = /datum/ai_controller/basic_controller/trooper/viscerator
 

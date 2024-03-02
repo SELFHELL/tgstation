@@ -74,7 +74,7 @@
 /datum/market_item/tool/science_goggles
 	name = "Science Goggles"
 	desc = "These glasses scan the contents of containers and projects their contents to the user in an easy to read format."
-	item = /obj/item/clothing/glasses/science
+	item = /obj/item/clothing/glasses/hud/science
 
 	price_min = CARGO_CRATE_VALUE * 0.75
 	price_max = CARGO_CRATE_VALUE

@@ -168,7 +168,7 @@
 	AddComponentFrom(ROUNDSTART_TRAIT, /datum/component/area_based_godmode, area_type = /area/shuttle/escape, allow_area_subtypes = TRUE)
 
 /mob/living/simple_animal/hostile/alien/maid/barmaid
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	name = "Barmaid"
 	desc = "A barmaid, a maiden found in a bar."
 	pass_flags = PASSTABLE

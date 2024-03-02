@@ -2,7 +2,7 @@
 /mob/living/basic/cow/wisdom
 	name = "wisdom cow"
 	desc = "Known for its wisdom, shares it with all."
-	gold_core_spawnable = FALSE
+	mob_spawnable_type = FALSE
 	ai_controller = /datum/ai_controller/basic_controller/cow/wisdom
 	///The type of wisdom this cow will grant
 	var/granted_wisdom

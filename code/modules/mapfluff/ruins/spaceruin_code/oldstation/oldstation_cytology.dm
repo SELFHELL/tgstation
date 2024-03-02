@@ -21,7 +21,7 @@
 		/datum/reagent/consumable/nutriment = 5,
 		/datum/reagent/cellulose = 5,
 		// Required for CELL_LINE_TABLE_GRAPE
-		/datum/reagent/toxin/slimejelly = 5,
+		/datum/reagent/toxin/slime_jelly = 5,
 		/datum/reagent/yuck = 5,
 		/datum/reagent/consumable/vitfro = 5,
 		// Supplementary for CELL_LINE_TABLE_GRAPE

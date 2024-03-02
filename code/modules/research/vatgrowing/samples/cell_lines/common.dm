@@ -235,7 +235,7 @@
 	required_reagents = list(/datum/reagent/consumable/nutriment/protein)
 
 	supplementary_reagents = list(
-		/datum/reagent/toxin/slimejelly = 2,
+		/datum/reagent/toxin/slime_jelly = 2,
 		/datum/reagent/consumable/liquidgibs = 2,
 		/datum/reagent/consumable/enzyme = 1)
 
@@ -288,7 +288,7 @@
 	desc = "Cubic ooze particles"
 	required_reagents = list(
 		/datum/reagent/consumable/nutriment/protein,
-		/datum/reagent/toxin/slimejelly,
+		/datum/reagent/toxin/slime_jelly,
 		/datum/reagent/yuck,
 		/datum/reagent/consumable/enzyme) //Powerful enzymes helps the cube digest prey.
 
@@ -313,7 +313,7 @@
 	desc = "Globular ooze particles"
 	required_reagents = list(
 		/datum/reagent/consumable/nutriment/protein,
-		/datum/reagent/toxin/slimejelly,
+		/datum/reagent/toxin/slime_jelly,
 		/datum/reagent/yuck,
 		/datum/reagent/consumable/vitfro)
 
@@ -344,7 +344,7 @@
 	required_reagents = list(/datum/reagent/consumable/nutriment/protein)
 	supplementary_reagents = list(
 		/datum/reagent/growthserum = 1,
-		/datum/reagent/toxin/slimejelly = 2,
+		/datum/reagent/toxin/slime_jelly = 2,
 		/datum/reagent/yuck = 2, //Almost every fun recipe requires this. Making this value too high makes cockroaches extremely anti-fun.
 		/datum/reagent/consumable/nutriment/vitamin = 1)
 

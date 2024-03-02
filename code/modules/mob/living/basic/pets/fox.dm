@@ -18,7 +18,7 @@
 	response_disarm_simple = "gently push aside"
 	response_harm_continuous = "kicks"
 	response_harm_simple = "kick"
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 	can_be_held = TRUE
 	held_state = "fox"
 	melee_damage_lower = 5
@@ -66,7 +66,7 @@
 	name = "Renault"
 	desc = "Renault, the Captain's trustworthy fox."
 	gender = FEMALE
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	unique_pet = TRUE
 
 // A more docile subtype that won't attack other animals.

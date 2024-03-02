@@ -187,7 +187,7 @@ GLOBAL_LIST_INIT(ore_probability, list(
 		if(20)
 			new /obj/item/disk/design_disk/modkit_disc/rapid_repeater(loc)
 		if(21)
-			new /obj/item/slimepotion/transference(loc)
+			new /obj/item/slime_potion/transference(loc)
 		if(22)
 			new /obj/item/slime_extract/adamantine(loc)
 		if(23)

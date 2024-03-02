@@ -15,7 +15,7 @@
 /mob/living/basic/parrot/poly
 	name = "Poly"
 	desc = "Poly the Parrot. An expert on quantum cracker theory."
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	speech_probability_rate = 13
 
 	/// Callback to save our memory at the end of the round.

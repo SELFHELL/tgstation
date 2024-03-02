@@ -280,6 +280,11 @@
 
 	warm_type = /obj/item/food/ready_donk/warm/nachos_grandes
 
+/obj/item/food/canned/peaches/pyrite
+	name = "canned pyrite peaches"
+	desc = "A can of blazing hot pyrite peaches. Nasty."
+	food_reagents = list(/datum/reagent/consumable/peachjuice = 12, /datum/reagent/consumable/sugar = 8, /datum/reagent/consumable/nutriment = 2, /datum/reagent/clf3 = 12)
+
 /obj/item/food/ready_donk/warm/nachos_grandes
 	name = "warm Ready-Donk: Donk Sol Series Boritos Nachos Grandes"
 	desc = "Get ready for game day with Donk's classic Nachos Grandes, sponsors of the Donk Sol Series! Boritos chips loaded with cheese, spicy meat and beans, alongside separate guac, pico and donk sauce. Served hotter than Sakamoto's fastball!"

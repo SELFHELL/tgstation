@@ -11,7 +11,7 @@
 	maxHealth = 1
 	speed = 1.25
 	can_be_held = TRUE
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 
 	verb_say = "chitters"
@@ -89,7 +89,7 @@
 	melee_damage_lower = 2.5
 	melee_damage_upper = 10
 	obj_damage = 10
-	gold_core_spawnable = HOSTILE_SPAWN
+	mob_spawnable_type = HOSTILE_SPAWN
 	faction = list(FACTION_HOSTILE, FACTION_MAINT_CREATURES)
 	ai_controller = /datum/ai_controller/basic_controller/cockroach/glockroach
 	cockroach_cell_line = CELL_LINE_TABLE_GLOCKROACH
@@ -134,7 +134,7 @@
 	melee_damage_upper = 10
 	obj_damage = 10
 	melee_attack_cooldown = 1 SECONDS
-	gold_core_spawnable = HOSTILE_SPAWN
+	mob_spawnable_type = HOSTILE_SPAWN
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	attack_vis_effect = ATTACK_EFFECT_SLASH
 	faction = list(FACTION_HOSTILE, FACTION_MAINT_CREATURES)

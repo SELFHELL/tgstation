@@ -21,7 +21,7 @@
 	attack_verb_simple = "batter"
 	attack_sound = 'sound/weapons/genhit1.ogg'
 	death_message = "explodes into a cloud of gas!"
-	gold_core_spawnable = HOSTILE_SPAWN
+	mob_spawnable_type = HOSTILE_SPAWN
 	basic_mob_flags = DEL_ON_DEATH
 	ai_controller = /datum/ai_controller/basic_controller/blob_spore
 	/// Size of cloud produced from a dying spore
@@ -64,7 +64,7 @@
 
 /// Variant of the blob spore which is actually spawned by blob factories
 /mob/living/basic/blob_minion/spore/minion
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	zombie_type = /mob/living/basic/blob_minion/zombie/controlled
 	/// We die if we leave the same turf as this z level
 	var/turf/z_turf

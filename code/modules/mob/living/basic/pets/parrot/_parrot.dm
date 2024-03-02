@@ -35,7 +35,7 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 	friendly_verb_continuous = "grooms"
 	friendly_verb_simple = "groom"
 	mob_size = MOB_SIZE_SMALL
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 
 	ai_controller = /datum/ai_controller/basic_controller/parrot
 

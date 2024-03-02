@@ -9,7 +9,7 @@
 	icon_living = "cat"
 	icon_dead = "cat_dead"
 	gender = FEMALE
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	unique_pet = TRUE
 	///the family we will bring in when a round starts
 	var/list/family = null

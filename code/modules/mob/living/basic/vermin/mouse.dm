@@ -14,7 +14,7 @@
 	can_be_held = TRUE
 	held_w_class = WEIGHT_CLASS_TINY
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 	faction = list(FACTION_RAT, FACTION_MAINT_CREATURES)
 	butcher_results = list(/obj/item/food/meat/slab/mouse = 1)
 
@@ -251,7 +251,7 @@
 	response_disarm_simple = "gently push aside"
 	response_harm_continuous = "splats"
 	response_harm_simple = "splat"
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	contributes_to_ratcap = FALSE
 
 /mob/living/basic/mouse/brown/tom/make_tameable()
@@ -271,7 +271,7 @@
 	name = "rat"
 	desc = "They're a nasty, ugly, evil, disease-ridden rodent with anger issues."
 
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	melee_damage_lower = 3
 	melee_damage_upper = 5
 	obj_damage = 5

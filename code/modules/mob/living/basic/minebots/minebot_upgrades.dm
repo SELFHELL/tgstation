@@ -35,7 +35,7 @@
 
 //AI
 
-/obj/item/slimepotion/slime/sentience/mining
+/obj/item/slime_potion/slime/sentience/mining
 	name = "minebot AI upgrade"
 	desc = "Can be used to grant sentience to minebots. It's incompatible with minebot armor and melee upgrades, and will override them."
 	icon_state = "door_electronics"
@@ -50,7 +50,7 @@
 	///cooldown boost to add
 	var/base_cooldown_add = 10
 
-/obj/item/slimepotion/slime/sentience/mining/after_success(mob/living/user, mob/living/basic_mob)
+/obj/item/slime_potion/slime/sentience/mining/after_success(mob/living/user, mob/living/basic_mob)
 	if(!istype(basic_mob, /mob/living/basic/mining_drone))
 		return
 	var/mob/living/basic/mining_drone/minebot = basic_mob

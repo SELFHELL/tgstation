@@ -695,7 +695,7 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 	if(!GLOB.friendly_animal_types.len)
 		for(var/typepath in typesof(/mob/living/simple_animal))
 			var/mob/living/simple_animal/simple_animal = typepath
-			if(initial(simple_animal.gold_core_spawnable) == FRIENDLY_SPAWN)
+			if(initial(simple_animal.mob_spawnable_type) == FRIENDLY_SPAWN)
 				GLOB.friendly_animal_types += simple_animal
 
 

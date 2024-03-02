@@ -9,7 +9,7 @@
 	icon_living = "pug"
 	icon_dead = "pug_dead"
 	butcher_results = list(/obj/item/food/meat/slab/pug = 3)
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 	collar_icon_state = "pug"
 	held_state = "pug"
 
@@ -21,7 +21,7 @@
 	name = "McGriff"
 	real_name = "McGriff"
 	desc = "This dog can tell something smells around here, and that something is CRIME!"
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	unique_pet = TRUE
 
 /mob/living/basic/pet/dog/bullterrier
@@ -33,7 +33,7 @@
 	icon_living = "bullterrier"
 	icon_dead = "bullterrier_dead"
 	butcher_results = list(/obj/item/food/meat/slab/corgi = 3) // Would feel redundant to add more new dog meats.
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 	collar_icon_state = "bullterrier"
 	held_state = "bullterrier"
 

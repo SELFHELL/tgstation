@@ -26,7 +26,7 @@ GLOBAL_DATUM(cargo_sloth, /mob/living/basic/sloth)
 	attack_vis_effect = ATTACK_EFFECT_BITE
 
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 
 	melee_damage_lower = 18
 	melee_damage_upper = 18
@@ -61,7 +61,7 @@ GLOBAL_DATUM(cargo_sloth, /mob/living/basic/sloth)
 	name = "Paperwork"
 	desc = "Cargo's pet sloth. About as useful as the rest of the techs."
 	gender = MALE
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 
 /mob/living/basic/sloth/citrus
 	name = "Citrus"
@@ -71,7 +71,7 @@ GLOBAL_DATUM(cargo_sloth, /mob/living/basic/sloth)
 	icon_dead = "cool_sloth_dead"
 	gender = FEMALE
 	butcher_results = list(/obj/item/toy/spinningtoy = 1)
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 
 /// They're really passive in game, so they just wanna get away if you start smacking them. No trees in space from them to use for clawing your eyes out, but they will try if desperate.
 /datum/ai_controller/basic_controller/sloth

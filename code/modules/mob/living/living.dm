@@ -829,6 +829,10 @@
 	if(QDELETED(src))
 		// Bro just like, don't ok
 		return FALSE
+
+	if(HAS_TRAIT(src, TRAIT_NO_REVIVE))
+		return
+		
 	if(excess_healing)
 		adjustOxyLoss(-excess_healing, updating_health = FALSE)
 		adjustToxLoss(-excess_healing, updating_health = FALSE, forced = TRUE) //slime friendly
@@ -1574,11 +1578,11 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	if(fire_stacks <= 0)
 		return FALSE
 
-	var/datum/status_effect/fire_handler/fire_stacks/fire_status = has_status_effect(/datum/status_effect/fire_handler/fire_stacks)
-	if(!fire_status || fire_status.on_fire)
-		return FALSE
+	for(var/datum/status_effect/fire_handler/fire_stacks/fire_status in status_effects)
+		if(!fire_status.on_fire)
+			fire_status.ignite()
 
-	return fire_status.ignite(silent)
+	return TRUE
 
 /**
  * Extinguish all fire on the mob

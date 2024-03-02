@@ -13,7 +13,7 @@
 	attack_verb_continuous = "lacerates"
 	attack_verb_simple = "lacerate"
 	melee_attack_cooldown = 1 SECONDS
-	gold_core_spawnable = HOSTILE_SPAWN
+	mob_spawnable_type = HOSTILE_SPAWN
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	attack_vis_effect = ATTACK_EFFECT_SLASH
 	faction = list(FACTION_NETHER)

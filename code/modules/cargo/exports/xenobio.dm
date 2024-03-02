@@ -18,26 +18,21 @@
 /datum/export/slime/rare
 	cost = CARGO_CRATE_VALUE * 0.28
 	unit_name = "rare slime core"
-	export_types = list(/obj/item/slime_extract/silver,/obj/item/slime_extract/darkblue,/obj/item/slime_extract/darkpurple,/obj/item/slime_extract/yellow)
+	export_types = list(/obj/item/slime_extract/silver,/obj/item/slime_extract/dark_blue,/obj/item/slime_extract/dark_purple,/obj/item/slime_extract/yellow)
 
 /datum/export/slime/charged
 	cost = CARGO_CRATE_VALUE
 	unit_name = "\improper EMP-proof slime core"
 	export_types = list(/obj/item/stock_parts/cell/emproof/slime)
 
-/datum/export/slime/hypercharged
-	cost = CARGO_CRATE_VALUE * 1.2
-	unit_name = "hypercharged slime core"
-	export_types = list(/obj/item/stock_parts/cell/high/slime_hypercharged)
-
 /datum/export/slime/epic //EPIIIIIIC
 	cost = CARGO_CRATE_VALUE * 0.44
 	unit_name = "epic slime core"
-	export_types = list(/obj/item/slime_extract/black,/obj/item/slime_extract/cerulean,/obj/item/slime_extract/oil,/obj/item/slime_extract/sepia,/obj/item/slime_extract/pyrite,/obj/item/slime_extract/adamantine,/obj/item/slime_extract/lightpink,/obj/item/slime_extract/bluespace)
+	export_types = list(/obj/item/slime_extract/black,/obj/item/slime_extract/cerulean,/obj/item/slime_extract/oil,/obj/item/slime_extract/sepia,/obj/item/slime_extract/pyrite,/obj/item/slime_extract/adamantine,/obj/item/slime_extract/light_pink,/obj/item/slime_extract/bluespace)
 
 /datum/export/slime/rainbow
 	cost = CARGO_CRATE_VALUE
 	unit_name = "rainbow slime core"
-	export_types = list(/obj/item/slime_extract/rainbow)
+	export_types = list(/obj/item/slime_extract/special/rainbow)
 
 

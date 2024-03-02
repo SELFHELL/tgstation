@@ -552,3 +552,13 @@
 	)
 	result = /obj/item/food/raw_pita_bread
 	category = CAT_MISCFOOD
+
+
+/datum/crafting_recipe/food/canned_pyrite_peaches
+	name = "Canned pyrite peaches"
+	reqs = list(
+		/obj/item/food/xenoflora/pyrite_peach = 3,
+		/obj/item/stack/sheet/iron = 1
+	)
+	result = /obj/item/food/canned/peaches/pyrite
+	subcategory = CAT_MISCFOOD

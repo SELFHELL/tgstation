@@ -26,7 +26,7 @@
 		blood_type = "S"
 	else if(holder.has_reagent(/datum/reagent/water))
 		blood_type = "H2O"
-	else if(holder.has_reagent(/datum/reagent/toxin/slimejelly))
+	else if(holder.has_reagent(/datum/reagent/toxin/slime_jelly))
 		blood_type = "TOX"
 	else
 		blood_type = null
@@ -74,7 +74,7 @@
 /obj/item/reagent_containers/blood/snail
 	blood_type = "S"
 	unique_blood = /datum/reagent/lube
-	
+
 /obj/item/reagent_containers/blood/snail/examine()
 	. = ..()
 	. += span_notice("It's a bit slimy... The label indicates that this is meant for snails.")
@@ -90,7 +90,7 @@
 // for slimepeople
 /obj/item/reagent_containers/blood/toxin
 	blood_type = "TOX"
-	unique_blood = /datum/reagent/toxin/slimejelly
+	unique_blood = /datum/reagent/toxin/slime_jelly
 
 /obj/item/reagent_containers/blood/toxin/examine()
 	. = ..()

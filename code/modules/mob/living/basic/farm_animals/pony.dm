@@ -21,7 +21,7 @@
 	melee_damage_upper = 10
 	health = 50
 	maxHealth = 50
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 	blood_volume = BLOOD_VOLUME_NORMAL
 	ai_controller = /datum/ai_controller/basic_controller/pony
 	/// Do we register a unique rider?

@@ -517,14 +517,17 @@
 	gender = NEUTER
 	///Amount of time to knock the target down for once it's hit in deciseconds.
 	var/knockdown = 0
+	var/bola_sound = TRUE
 
 /obj/item/restraints/legcuffs/bola/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, gentle = FALSE, quickstart = TRUE)
 	if(!..())
 		return
-	playsound(src.loc,'sound/weapons/bolathrow.ogg', 75, TRUE)
+	if(bola_sound)
+		playsound(src.loc,'sound/weapons/bolathrow.ogg', 75, TRUE)
 
 /obj/item/restraints/legcuffs/bola/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	if(..() || !iscarbon(hit_atom))//if it gets caught or the target can't be cuffed,
+	. = ..()
+	if(. || !iscarbon(hit_atom))//if it gets caught or the target can't be cuffed,
 		return//abort
 	ensnare(hit_atom)
 
@@ -605,5 +608,85 @@
 	if(effectReference)
 		QDEL_NULL(effectReference)
 
+
+/obj/item/restraints/legcuffs/bola/slime_trap
+	name = "slime trap"
+	desc = "A living slime booby trap. It will jump at anyone except it's owner, restraining and knocking them down."
+	icon = 'icons/obj/xenobiology/slime_extracts.dmi'
+	icon_state = "slime_trap_preparing"
+	breakouttime = 4.5 SECONDS
+	knockdown = 1 SECONDS
+	bola_sound = FALSE
+	anchored = TRUE
+	var/mob/living/our_thrower
+	var/trap_range = 1
+	var/list/tracked_turfs = list()
+
+/obj/item/restraints/legcuffs/bola/slime_trap/Initialize(mapload, new_dir, new_thrower, additional_uses)
+	. = ..()
+	if(new_dir)
+		setDir(new_dir)
+
+	if(new_thrower)
+		our_thrower = new_thrower
+		addtimer(CALLBACK(src, .proc/setup_turfs), 2 SECONDS)
+	else
+		setup_turfs()
+
+	if(additional_uses)
+		breakouttime += additional_uses * 1.5 SECONDS
+		knockdown += additional_uses * 0.5 SECONDS
+
+	if(additional_uses == 4)
+		trap_range += 1
+
+	ADD_TRAIT(src, TRAIT_UNCATCHABLE, TRAIT_GENERIC)
+
+/obj/item/restraints/legcuffs/bola/slime_trap/dropped(mob/user)
+	. = ..()
+	QDEL_NULL(src)
+
+/obj/item/restraints/legcuffs/bola/slime_trap/proc/setup_turfs()
+	icon_state = "slime_trap"
+	for(var/turf/open/possible_target in view(trap_range, src))
+		tracked_turfs += possible_target
+		RegisterSignal(possible_target, COMSIG_ATOM_ENTERED, .proc/on_entered)
+		RegisterSignal(possible_target, COMSIG_TURF_CHANGE, .proc/turf_changed_pre)
+
+/obj/item/restraints/legcuffs/bola/slime_trap/proc/on_entered(datum/source, atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	SIGNAL_HANDLER
+
+	if(!isliving(arrived) || arrived == our_thrower)
+		return
+
+	if(iscarbon(arrived))
+		var/mob/living/carbon/victim = arrived
+		if(victim.legcuffed || victim.num_legs < 0)
+			return
+
+	for(var/turf/open/tracked_turf as anything in tracked_turfs)
+		UnregisterSignal(tracked_turf, list(COMSIG_ATOM_ENTERED, COMSIG_TURF_CHANGE))
+
+	tracked_turfs = list()
+
+	icon_state = "slime_snare"
+	anchored = FALSE
+	throw_at(arrived, 3, 2, our_thrower)
+
+/obj/item/restraints/legcuffs/bola/slime_trap/proc/turf_changed_pre(turf/source, path, new_baseturfs, flags, post_change_callbacks)
+	SIGNAL_HANDLER
+	UnregisterSignal(source, list(COMSIG_ATOM_ENTERED, COMSIG_TURF_CHANGE))
+	tracked_turfs -= source
+	addtimer(CALLBACK(src, .proc/reconnect_turf, source.x, source.y, source.z), 1)
+
+/obj/item/restraints/legcuffs/bola/slime_trap/proc/reconnect_turf(turf_x, turf_y, turf_z)
+	var/turf/new_turf = locate(turf_x, turf_y, turf_z)
+	if(!isopenturf(new_turf))
+		return
+
+	tracked_turfs += new_turf
+	RegisterSignal(new_turf, COMSIG_ATOM_ENTERED, .proc/on_entered)
+	RegisterSignal(new_turf, COMSIG_TURF_CHANGE, .proc/turf_changed_pre)
+	
 #undef HANDCUFFS_TYPE_WEAK
 #undef HANDCUFFS_TYPE_STRONG

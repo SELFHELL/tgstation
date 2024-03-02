@@ -12,6 +12,16 @@
 	resistance_flags = ACID_PROOF
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
 
+/obj/item/clothing/head/bio_hood/equipped(mob/living/user, slot)
+	. = ..()
+	if(slot == ITEM_SLOT_HEAD)
+		if(istype(user.get_item_by_slot(ITEM_SLOT_OCLOTHING), /obj/item/clothing/suit/bio_suit))
+			ADD_TRAIT(user, TRAIT_SLIME_RESISTANCE, CLOTHING_TRAIT)
+
+/obj/item/clothing/head/bio_hood/dropped(mob/living/user)
+	. = ..()
+	REMOVE_TRAIT(user, TRAIT_SLIME_RESISTANCE, CLOTHING_TRAIT)
+
 /obj/item/clothing/head/bio_hood/Initialize(mapload)
 	. = ..()
 	if(flags_inv & HIDEFACE)
@@ -39,6 +49,16 @@
 	strip_delay = 70
 	equip_delay_other = 70
 	resistance_flags = ACID_PROOF
+
+/obj/item/clothing/suit/bio_suit/equipped(mob/living/user, slot)
+	. = ..()
+	if(slot == ITEM_SLOT_HEAD)
+		if(istype(user.get_item_by_slot(ITEM_SLOT_OCLOTHING), /obj/item/clothing/head/bio_hood))
+			ADD_TRAIT(user, TRAIT_SLIME_RESISTANCE, CLOTHING_TRAIT)
+
+/obj/item/clothing/suit/bio_suit/dropped(mob/living/user)
+	. = ..()
+	REMOVE_TRAIT(user, TRAIT_SLIME_RESISTANCE, CLOTHING_TRAIT)
 
 //Standard biosuit, orange stripe
 /datum/armor/suit_bio_suit

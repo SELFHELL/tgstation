@@ -1254,7 +1254,7 @@
 /obj/item/paper/fluff/awaymissions/caves/shipment_receipt,
 /obj/item/organ/internal/eyes/robotic/thermals,
 /obj/item/gun/energy/laser/captain/scattershot,
-/obj/item/slimepotion/fireproof,
+/obj/item/slime_potion/fireproof,
 /turf/open/misc/asteroid/basalt{
 	initial_gas_mix = "n2=23;o2=14;TEMP=2.7"
 	},
@@ -1315,7 +1315,7 @@
 	},
 /area/awaymission/caves/bmp_asteroid)
 "nY" = (
-/obj/item/slimepotion/fireproof,
+/obj/item/slime_potion/fireproof,
 /turf/open/misc/asteroid/basalt{
 	initial_gas_mix = "n2=23;o2=14;TEMP=2.7"
 	},
@@ -1499,8 +1499,8 @@
 /obj/item/grenade/syndieminibomb/concussion,
 /obj/item/grenade/syndieminibomb/concussion,
 /obj/item/grenade/syndieminibomb/concussion,
-/obj/item/slimepotion/fireproof,
-/obj/item/slimepotion/fireproof,
+/obj/item/slime_potion/fireproof,
+/obj/item/slime_potion/fireproof,
 /obj/item/clothing/glasses/thermal,
 /turf/open/misc/asteroid/basalt{
 	initial_gas_mix = "n2=23;o2=14;TEMP=2.7"

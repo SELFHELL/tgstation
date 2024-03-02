@@ -170,7 +170,7 @@
 /datum/crafting_recipe/food/slimetoast
 	name = "Slime toast"
 	reqs = list(
-		/datum/reagent/toxin/slimejelly = 5,
+		/datum/reagent/toxin/slime_jelly = 5,
 		/obj/item/food/breadslice/plain = 1
 	)
 	result = /obj/item/food/jelliedtoast/slime

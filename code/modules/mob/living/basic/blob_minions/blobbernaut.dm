@@ -25,7 +25,7 @@
 	pressure_resistance = 50
 	mob_size = MOB_SIZE_LARGE
 	hud_type = /datum/hud/living/blobbernaut
-	gold_core_spawnable = HOSTILE_SPAWN
+	mob_spawnable_type = HOSTILE_SPAWN
 	ai_controller = /datum/ai_controller/basic_controller/blobbernaut
 
 /mob/living/basic/blob_minion/blobbernaut/Initialize(mapload)
@@ -39,7 +39,7 @@
 
 /// This variant is the one actually spawned by blob factories, takes damage when away from blob tiles
 /mob/living/basic/blob_minion/blobbernaut/minion
-	gold_core_spawnable = NO_SPAWN
+	mob_spawnable_type = NO_SPAWN
 	/// Is our factory dead?
 	var/orphaned = FALSE
 

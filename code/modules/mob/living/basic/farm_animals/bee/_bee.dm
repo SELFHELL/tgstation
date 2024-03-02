@@ -35,7 +35,7 @@
 	mob_size = MOB_SIZE_TINY
 	mob_biotypes = MOB_ORGANIC|MOB_BUG
 	density = FALSE
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 	can_be_held = TRUE
 	held_w_class = WEIGHT_CLASS_TINY
 	environment_smash  = ENVIRONMENT_SMASH_NONE

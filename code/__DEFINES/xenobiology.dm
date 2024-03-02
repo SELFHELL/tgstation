@@ -1,4 +1,4 @@
-//gold slime core spawning (used with var/gold_core_spawnable)
+//gold slime core spawning (used with var/mob_spawnable_type)
 /// Mob cannot be spawned with a gold slime core
 #define NO_SPAWN 0
 /// Mob can spawned with a gold slime core with plasma reaction as a hostile creature

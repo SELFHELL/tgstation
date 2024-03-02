@@ -112,3 +112,74 @@
 
 /turf/closed/wall/material/meat/airless
 	baseturfs = /turf/open/floor/material/meat/airless
+
+
+/turf/closed/wall/slime
+	name = "slimy wall"
+	desc = "A huge chunk of semi-transparent slimy goo."
+	icon = 'icons/turf/walls.dmi'
+	icon_state = "slime_wall"
+	explosion_block = 0
+	opacity = FALSE
+	pass_flags_self = PASSGLASS
+
+	baseturfs = /turf/open/misc/slime
+
+	flags_ricochet = null
+
+	smoothing_flags = null
+	smoothing_groups = null
+	canSmoothWith = null
+
+	girder_type = null
+	bullet_sizzle = TRUE
+	bullet_bounce_sound = null
+
+	can_engrave = FALSE
+	hardness = 70
+	sheet_type = null
+	girder_type = null
+
+/turf/closed/wall/slime/Initialize(mapload)
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/turf/closed/wall/slime/LateInitialize()
+	. = ..()
+	AddElement(/datum/element/turf_z_transparency)
+
+/turf/closed/wall/slime/attackby(obj/item/W, mob/user, params)
+	playsound(src, 'sound/effects/blobattack.ogg', 100, TRUE)
+	user.changeNext_move(CLICK_CD_MELEE)
+	user.do_attack_animation(src)
+	if(prob(W.force * 3 - 15))
+		user.visible_message(span_danger("[user] smashes through [src]!"), \
+						span_danger("You smash through [src] with [W]!"))
+		ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
+	else
+		to_chat(user, span_danger("You hit [src], to no effect!"))
+
+/turf/closed/wall/slime/attack_hand(mob/user, list/modifiers)
+	if(user.zone_selected != BODY_ZONE_PRECISE_MOUTH || !iscarbon(user))
+		return ..()
+
+	var/mob/living/carbon/carbon_user = user
+
+	if(!carbon_user.is_mouth_covered())
+		if(carbon_user.combat_mode)
+			carbon_user.visible_message(span_warning("[carbon_user] takes a bite out of [src]."), span_warning("You take a bite out of [src] and it tastes horribly."))
+			carbon_user.reagents.add_reagent(/datum/reagent/toxin/slime_jelly, 5)
+			playsound(src, 'sound/weapons/bite.ogg', 50, TRUE, -1)
+			return
+
+		var/obj/item/organ/internal/tongue/licking_tongue = carbon_user.getorganslot(ORGAN_SLOT_TONGUE)
+		if(!licking_tongue)
+			return
+
+		carbon_user.visible_message(span_warning("[carbon_user] licks [src]."), span_warning("You lick [src] and wonder how did you end up here."))
+		carbon_user.reagents.add_reagent(/datum/reagent/toxin/slime_jelly, 1)
+
+/turf/closed/wall/slime/CanAllowThrough(atom/movable/mover, border_dir)
+	. = ..()
+	if(isslime(mover))
+		return TRUE

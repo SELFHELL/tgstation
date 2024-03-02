@@ -511,8 +511,6 @@
 #define MIRROR_BADMIN (1<<5)
 //ERT spawn template (avoid races that don't function without correct gear)
 #define ERT_SPAWN (1<<6)
-//xenobio black crossbreed
-#define SLIME_EXTRACT (1<<7)
 
 // Randomization keys for calling wabbajack with.
 // Note the contents of these keys are important, as they're displayed to the player

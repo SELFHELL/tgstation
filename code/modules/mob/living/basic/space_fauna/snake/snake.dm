@@ -32,7 +32,7 @@
 
 	faction = list(FACTION_HOSTILE)
 	mob_biotypes = MOB_ORGANIC | MOB_BEAST | MOB_REPTILE
-	gold_core_spawnable = FRIENDLY_SPAWN
+	mob_spawnable_type = FRIENDLY_SPAWN
 
 	ai_controller = /datum/ai_controller/basic_controller/snake
 

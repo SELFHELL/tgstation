@@ -305,8 +305,8 @@
 /turf/open/proc/water_vapor_gas_act()
 	MakeSlippery(TURF_WET_WATER, min_wet_time = 100, wet_time_to_add = 50)
 
-	for(var/mob/living/simple_animal/slime/M in src)
-		M.apply_water()
+	for(var/mob/living/water_target in src)
+		SEND_SIGNAL(water_target, COMSIG_LIVING_APPLY_WATER)
 
 	wash(CLEAN_WASH)
 	for(var/atom/movable/movable_content as anything in src)

@@ -87,7 +87,7 @@
 	desc = "A robot built for base upkeep, intended for use inside hivebot colonies."
 	health = 60
 	maxHealth = 60
-	gold_core_spawnable = HOSTILE_SPAWN
+	mob_spawnable_type = HOSTILE_SPAWN
 	ranged_attacker = TRUE
 	ai_controller = /datum/ai_controller/basic_controller/hivebot/mechanic
 	///cooldown to repair machines

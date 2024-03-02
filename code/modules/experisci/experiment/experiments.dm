@@ -24,8 +24,8 @@
 	required_atoms = list(/obj/item/slime_extract/adamantine = 1,
 		/obj/item/slime_extract/oil = 1,
 		/obj/item/slime_extract/black = 1,
-		/obj/item/slime_extract/lightpink = 1,
-		/obj/item/slime_extract/rainbow = 10)
+		/obj/item/slime_extract/light_pink = 1,
+		/obj/item/slime_extract/special/rainbow = 10)
 
 /datum/experiment/scanning/random/cytology/easy
 	name = "Basic Cytology Scanning Experiment"
@@ -218,7 +218,7 @@
 	required_atoms = list(
 		/obj/machinery/autolathe = 1,
 		/obj/machinery/rnd/production/circuit_imprinter/department/science = 1,
-		/obj/machinery/monkey_recycler = 1,
+		/obj/machinery/biomass_recycler = 1,
 		/obj/machinery/processor/slime = 1,
 		/obj/machinery/processor = 2,
 		/obj/machinery/reagentgrinder = 2,

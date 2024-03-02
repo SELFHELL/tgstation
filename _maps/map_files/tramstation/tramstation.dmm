@@ -10009,7 +10009,7 @@
 /obj/item/stack/sheet/mineral/plasma{
 	pixel_y = 4
 	},
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceence,
 /obj/machinery/requests_console/directional/west{
 	department = "Pharmacy";
 	name = "Pharmacy Requests Console"
@@ -35455,7 +35455,7 @@
 /turf/open/floor/iron/white,
 /area/station/science/lower)
 "lym" = (
-/obj/machinery/monkey_recycler,
+/obj/machinery/biomass_recycler,
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 4
 	},
@@ -51567,7 +51567,7 @@
 	},
 /obj/structure/table/glass,
 /obj/item/healthanalyzer,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceence,
 /obj/item/clothing/glasses/hud/health,
 /turf/open/floor/iron/white,
 /area/station/medical/virology)
@@ -58625,7 +58625,7 @@
 /obj/effect/turf_decal/trimline/purple/filled/line,
 /obj/structure/table,
 /obj/item/clothing/gloves/latex,
-/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/hud/scienceence,
 /turf/open/floor/iron/white,
 /area/station/science/lobby)
 "tJB" = (

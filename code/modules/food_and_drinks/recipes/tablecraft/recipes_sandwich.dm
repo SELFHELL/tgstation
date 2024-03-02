@@ -28,7 +28,7 @@
 /datum/crafting_recipe/food/slimesandwich
 	name = "Jelly sandwich"
 	reqs = list(
-		/datum/reagent/toxin/slimejelly = 5,
+		/datum/reagent/toxin/slime_jelly = 5,
 		/obj/item/food/breadslice/plain = 2,
 	)
 	result = /obj/item/food/sandwich/jelly/slime
